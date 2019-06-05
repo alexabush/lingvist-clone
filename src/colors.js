@@ -1,0 +1,20 @@
+export night4 = '#2E3440'
+export night3 = '#2E3440'
+export night2 = '#2E3440'
+export night1 = '#2E3440'
+
+export polar4 = '#2E3440'
+export polar3 = '#2E3440'
+export polar2 = '#2E3440'
+export polar1 = '#2E3440'
+
+export frost4 = '#2E3440'
+export frost3 = '#2E3440'
+export frost2 = '#2E3440'
+export frost1 = '#2E3440'
+
+export red    = '#2E3440'
+export orange = '#2E3440'
+export rellow = '#2E3440'
+export green  = '#2E3440'
+export purple = '#2E3440'
