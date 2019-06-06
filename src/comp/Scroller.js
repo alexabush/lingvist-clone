@@ -9,9 +9,13 @@ export default class Scroller extends R.PureComponent {
     onSlide: T.func,
   };
 
-  state = { fadeLeft: false, fadeRight: false };
+  state = {
+    isFadeLeft: false,
+    isFadeRight: false,
+  };
 
   componentDidMount() {
+    this.handleScroll();
     let scroller = document.querySelector('.Scroller');
     scroller.addEventListener('scroll', this.handleScroll);
   }
@@ -22,55 +26,63 @@ export default class Scroller extends R.PureComponent {
   }
 
   handleScroll = () => {
+    this.props.onSlide();
     let scroller = document.querySelector('.Scroller');
-    const showGradientCoordinate = 80;
+    const showGradientCoordinate = 45;
     if (scroller.scrollLeft > showGradientCoordinate) {
-      this.setState({ fadeLeft: true });
+      this.setState({ isFadeLeft: true });
     } else {
-      this.setState({ fadeLeft: false });
+      this.setState({ isFadeLeft: false });
     }
     if (scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - showGradientCoordinate) {
-      this.setState({ fadeRight: true });
+      this.setState({ isFadeRight: true });
     } else {
-      this.setState({ fadeRight: false });
+      this.setState({ isFadeRight: false });
     }
   };
 
   render() {
-    let numberComponents = this.props.values.map(num => {
-      let isPrev = this.props.modifiers[num] === 'last';
-      let isCurrent = this.props.modifiers[num] === 'current';
-      return <Number key={num} number={num} isPrev={isPrev} isCurrent={isCurrent} />;
+    let { values, modifiers, onChange, onSlide } = this.props;
+    let { isFadeLeft, isFadeRight } = this.state;
+    let numberComponents = values.map(num => {
+      let modifierComponent = modifiers[num] ? modifiers[num] : null;
+      return <Number key={num} number={num} modifier={modifierComponent} handleClick={onChange} />;
     });
-    let fadeLeft = this.state.fadeLeft ? 'fade-left' : '';
-    let fadeRight = this.state.fadeRight ? 'fade-right' : '';
+    let fadeLeft = isFadeLeft ? 'fade-left' : '';
+    let fadeRight = isFadeRight ? 'fade-right' : '';
     return (
-      <div className="Scroller">
-        {numberComponents}
-        <div className={`${fadeLeft}`} />
+      <div className="scroll-container">
         <div className={`${fadeRight}`} />
+        <div className="Scroller">
+          {numberComponents}
+          <div className={`${fadeLeft}`} />
+        </div>
         <style jsx>{`
+          .scroll-container {
+            position: relative;
+            box-shadow: 0.5px 0.5px 0.5px 0.5px;
+            margin: 100px;
+          }
           .Scroller {
             display: flex;
             min-width: 100%;
             overflow-x: auto;
-            position: relative;
           }
           ::-webkit-scrollbar {
             display: none;
           }
           .fade-right {
+            position: absolute;
+            right: 0px;
             width: 100px;
             height: 70px;
-            position: fixed;
-            right: 0;
+            z-index: 1;
             background: linear-gradient(to right, transparent, white);
           }
           .fade-left {
+            position: absolute;
             width: 100px;
             height: 70px;
-            position: fixed;
-            left: 0;
             background: linear-gradient(to left, transparent, white);
           }
         `}</style>
@@ -79,30 +91,21 @@ export default class Scroller extends R.PureComponent {
   }
 }
 
-function Number({ number, isPrev, isCurrent }) {
+function Number({ number, modifier, handleClick }) {
   return (
-    <div className="Number">
+    <div className="Number" onClick={() => handleClick(number)}>
       {number}
-      <div className="modifier">
-        {isPrev ? 0 : null}
-        {isCurrent ? 1 : null}
-      </div>
+      <div className="mod">{modifier}</div>
       <style jsx>{`
         .Number {
           padding: 10px;
           display: flex;
           flex-direction: column;
-          justify-content: center;
           align-items: center;
           min-width: 50px;
           height: 50px;
           font-size: 32px;
           position: relative;
-        }
-        .modifier {
-          position: absolute;
-          bottom: 5px;
-          font-size: 16px;
         }
       `}</style>
     </div>
