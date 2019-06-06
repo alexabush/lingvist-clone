@@ -1,7 +1,8 @@
 import Card from '../src/comp/Card';
+import Scroller from '../src/comp/Scroller';
 import Chiclet from '../src/comp/Chiclet';
 import R from 'react';
-export default class ExampleChiclets extends R.Component {
+class ExampleChiclets extends R.Component {
   state = {
     isSelected1: true,
     isSelected2: false,
@@ -33,4 +34,38 @@ export default class ExampleChiclets extends R.Component {
       </div>
     );
   }
+}
+
+function onSlideTester() {
+  console.log('on slide');
+}
+const oneToTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+let mod = {
+  '8': <div style={{ width: 8, height: 8, borderRadius: 4, border: '1px dotted black' }} />,
+  '10': <div style={{ width: 6, height: 6, borderRadius: 3, background: 'black' }} />,
+};
+
+const updateModifier = num => {
+  mod[num] = <div style={{ width: 6, height: 6, borderRadius: 3, background: 'black' }} />;
+  console.log(mod);
+};
+
+class ExampleScroller extends R.Component {
+  render() {
+    return (
+      <div style={{ width: '700px' }}>
+        <Scroller values={oneToTen} modifiers={mod} onChange={updateModifier} onSlide={onSlideTester} />
+      </div>
+    );
+  }
+}
+
+export default function DisplayAll() {
+  return (
+    <div>
+      <ExampleScroller />
+      <ExampleChiclets />
+    </div>
+  );
 }
