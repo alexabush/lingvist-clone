@@ -4,30 +4,32 @@ import { Animate } from 'react-simple-animate';
 export default class SFCard extends R.PureComponent {
   static propTypes = {
     children: T.any,
+    toggleIndex: T.number,
+    clickIndex: T.number,
   };
-  state = { isHide: false };
+  state = { isExpanded: true };
 
-  toggleShow = () => {
+  toggleExpand = () => {
     this.setState(state => {
       return {
-        isHide: !state.isHide,
+        isExpanded: !state.isExpanded,
       };
     });
   };
 
   render() {
-    let { children } = this.props;
-    let { isHide } = this.state;
-
+    let { toggleIndex, clickIndex, children } = this.props;
+    let { isExpanded } = this.state;
     let childComponents = React.Children.map(children, (child, idx) => {
-      if (children.length === 3 && idx === 0) {
-        return <div onClick={this.toggleShow}>{child}</div>;
-      } else if (children.length === 3 && idx === 1) {
+      if (idx === toggleIndex) {
         return (
-          <Animate play={isHide} start={{ height: '20px' }} end={{ height: '0px' }} complete={{ display: 'none' }}>
+          <Animate play={!isExpanded} start={{ height: 'auto' }} end={{ height: '0px' }} complete={{ display: 'none' }}>
             {child}
+            <hr />
           </Animate>
         );
+      } else if (idx === clickIndex) {
+        return <div onClick={this.toggleExpand}>{child}</div>;
       } else {
         return child;
       }

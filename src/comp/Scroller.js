@@ -61,7 +61,6 @@ export default class Scroller extends R.PureComponent {
           .scroll-container {
             position: relative;
             box-shadow: 0.5px 0.5px 0.5px 0.5px;
-            margin: 100px;
           }
           .Scroller {
             display: flex;

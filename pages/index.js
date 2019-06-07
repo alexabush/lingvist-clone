@@ -36,26 +36,35 @@ class ExampleChiclets extends R.Component {
   }
 }
 
-function onSlideTester() {
-  console.log('on slide');
-}
-const oneToTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-let mod = {
-  '8': <div style={{ width: 8, height: 8, borderRadius: 4, border: '1px dotted black' }} />,
-  '10': <div style={{ width: 6, height: 6, borderRadius: 3, background: 'black' }} />,
-};
-
-const updateModifier = num => {
-  mod[num] = <div style={{ width: 6, height: 6, borderRadius: 3, background: 'black' }} />;
-  console.log(mod);
-};
-
 class ExampleScroller extends R.Component {
+  state = {
+    oneToTen: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    mod: {
+      '8': <div style={{ width: 8, height: 8, borderRadius: 4, border: '1px dotted black' }} />,
+      '10': <div style={{ width: 6, height: 6, borderRadius: 3, background: 'black' }} />,
+    },
+  };
+  onSlideTester = () => {
+    console.log('on slide');
+  };
+
+  updateModifier = num => {
+    this.setState(state => {
+      let newMod = Object.keys(state.mod).reduce((acc, key) => {
+        if (state.mod[key].props.style.background === 'black') return acc;
+        acc[key] = state.mod[key];
+        return acc;
+      }, {});
+      newMod[num] = <div style={{ width: 6, height: 6, borderRadius: 3, background: 'black' }} />;
+      return { mod: newMod };
+    });
+  };
+
   render() {
+    let { oneToTen, mod, options } = this.state;
     return (
-      <div style={{ width: '700px' }}>
-        <Scroller values={oneToTen} modifiers={mod} onChange={updateModifier} onSlide={onSlideTester} />
+      <div style={{ width: '500px' }}>
+        <Scroller values={oneToTen} modifiers={mod} onChange={this.updateModifier} onSlide={this.onSlideTester} />
       </div>
     );
   }
@@ -64,8 +73,43 @@ class ExampleScroller extends R.Component {
 export default function DisplayAll() {
   return (
     <div>
-      <ExampleScroller />
-      <ExampleChiclets />
+      <div style={{ margin: '30px' }}>
+        <h2>Example Scroller</h2>
+        <ExampleScroller />
+      </div>
+      <div style={{ margin: '30px' }}>
+        <h2>Example Chiclets</h2>
+        <ExampleChiclets />
+      </div>
+      <div style={{ margin: '30px' }}>
+        <h2>Card</h2>
+        <ExerciseCard />
+      </div>
+    </div>
+  );
+}
+
+class ExerciseCard extends R.Component {
+  render() {
+    return (
+      <Card toggleIndex={1} clickIndex={0}>
+        <ExampleChiclets />
+        <WorkoutData />
+        <ExampleScroller />
+      </Card>
+    );
+  }
+}
+
+function WorkoutData() {
+  return (
+    <div style={{ display: 'flex', 'flex-direction': 'column', 'justify-content': 'center', 'align-items': 'center' }}>
+      <p>Extra Information Goes Here</p>
+      <p>Equipment Selection w/Weight Calculator</p>
+      <p>Variation Selection</p>
+      <p>History</p>
+      <p>Rest Timer Config</p>
+      <p>Difficulty</p>
     </div>
   );
 }
