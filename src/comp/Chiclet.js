@@ -1,5 +1,6 @@
 import R from 'react';
 import T from 'prop-types';
+import { polar1, night1 } from '../colors';
 
 export default class SFCard extends R.PureComponent {
   static propTypes = {
@@ -29,18 +30,18 @@ export default class SFCard extends R.PureComponent {
             align-items: center;
             padding: 5px;
             border-radius: 5px;
-            background: grey;
-            color: white;
+            background: ${night1};
+            color: ${polar1};
           }
           .outline {
-            border: 2px dotted grey;
-            background: white;
-            color: grey;
+            border: 2px dotted ${night1};
+            background: ${polar1};
+            color: ${night1};
           }
           .selected {
-            border: 2px solid grey;
+            border: 2px solid ${night1};
             border-radius: 5px;
-            background: white;
+            background: ${polar1};
             padding: 2px;
           }
         `}</style>

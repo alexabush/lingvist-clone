@@ -1,40 +1,49 @@
-import R from 'react';
+import React from 'react';
 import T from 'prop-types';
-import { Animate } from 'react-simple-animate';
-export default class SFCard extends R.PureComponent {
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
+
+export default class Card extends React.Component {
   static propTypes = {
     children: T.any,
-    toggleIndex: T.number,
-    clickIndex: T.number,
-  };
-  state = { isExpanded: true };
-
-  toggleExpand = () => {
-    this.setState(state => {
-      return {
-        isExpanded: !state.isExpanded,
-      };
-    });
   };
 
   render() {
-    let { toggleIndex, clickIndex, children } = this.props;
-    let { isExpanded } = this.state;
+    let { children } = this.props;
     let childComponents = React.Children.map(children, (child, idx) => {
-      if (idx === toggleIndex) {
-        return (
-          <Animate play={!isExpanded} start={{ height: 'auto' }} end={{ height: '0px' }} complete={{ display: 'none' }}>
-            {child}
-            <hr />
-          </Animate>
-        );
-      } else if (idx === clickIndex) {
-        return <div onClick={this.toggleExpand}>{child}</div>;
-      } else {
-        return child;
-      }
+      return child ? (
+        <div key={child.props.children}>
+          {child}
+          {idx < children.length - 1 && <hr />}
+        </div>
+      ) : null;
     });
+    return (
+      <div>
+        <ReactCSSTransitionGroup transitionName={'toggle'} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
+          {childComponents}
+        </ReactCSSTransitionGroup>
+        <style jsx global>{`
+          .toggle-enter {
+            max-height: 0px;
+          }
 
-    return <div>{childComponents}</div>;
+          .toggle-enter.toggle-enter-active {
+            overflow: hidden;
+            max-height: 300px;
+            transition: max-height 1000ms ease-in;
+          }
+
+          .toggle-leave {
+            max-height: 300px;
+          }
+
+          .toggle-leave.toggle-leave-active {
+            overflow: hidden;
+            max-height: 0px;
+            transition: max-height 1000ms ease-in;
+          }
+        `}</style>
+      </div>
+    );
   }
 }

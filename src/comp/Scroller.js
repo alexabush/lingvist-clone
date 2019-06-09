@@ -1,5 +1,6 @@
 import R from 'react';
 import T from 'prop-types';
+import { polar1 } from '../colors';
 
 export default class Scroller extends R.PureComponent {
   static propTypes = {
@@ -76,13 +77,13 @@ export default class Scroller extends R.PureComponent {
             width: 100px;
             height: 70px;
             z-index: 1;
-            background: linear-gradient(to right, transparent, white);
+            background: linear-gradient(to right, transparent, ${polar1});
           }
           .fade-left {
             position: absolute;
             width: 100px;
             height: 70px;
-            background: linear-gradient(to left, transparent, white);
+            background: linear-gradient(to left, transparent, ${polar1});
           }
         `}</style>
       </div>
@@ -94,7 +95,7 @@ function Number({ number, modifier, handleClick }) {
   return (
     <div className="Number" onClick={() => handleClick(number)}>
       {number}
-      <div className="mod">{modifier}</div>
+      <div>{modifier}</div>
       <style jsx>{`
         .Number {
           padding: 10px;

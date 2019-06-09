@@ -90,11 +90,24 @@ export default function DisplayAll() {
 }
 
 class ExerciseCard extends R.Component {
+  state = { isExpanded: true };
+
+  toggleExpand = () => {
+    this.setState(state => {
+      return {
+        isExpanded: !state.isExpanded,
+      };
+    });
+  };
+
   render() {
     return (
-      <Card toggleIndex={1} clickIndex={0}>
-        <ExampleChiclets />
-        <WorkoutData />
+      <Card isExpanded={this.state.isExpanded}>
+        <div>
+          <div onClick={this.toggleExpand}>Toggle</div>
+          <ExampleChiclets />
+        </div>
+        {this.state.isExpanded && <WorkoutData />}
         <ExampleScroller />
       </Card>
     );
