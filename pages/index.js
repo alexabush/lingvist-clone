@@ -1,8 +1,8 @@
-import Card from '../src/comp/Card';
-import Scroller from '../src/comp/Scroller';
-import Chiclet from '../src/comp/Chiclet';
+import SFCard from '../src/comp/SFCard';
+import SFScroller from '../src/comp/SFScroller';
+import SFChiclet from '../src/comp/SFChiclet';
 import R from 'react';
-class ExampleChiclets extends R.Component {
+class ExampleChiclets extends R.PureComponent {
   state = {
     isSelected1: true,
     isSelected2: false,
@@ -22,21 +22,21 @@ class ExampleChiclets extends R.Component {
   render() {
     return (
       <div>
-        <Chiclet onClick={this.handleClick1} selected={this.state.isSelected1}>
+        <SFChiclet onClick={this.handleClick1} selected={this.state.isSelected1}>
           10
-        </Chiclet>
-        <Chiclet onClick={this.handleClick2} selected={this.state.isSelected2}>
+        </SFChiclet>
+        <SFChiclet onClick={this.handleClick2} selected={this.state.isSelected2}>
           9
-        </Chiclet>
-        <Chiclet onClick={this.handleClick} outline>
+        </SFChiclet>
+        <SFChiclet onClick={this.handleClick} outline>
           8
-        </Chiclet>
+        </SFChiclet>
       </div>
     );
   }
 }
 
-class ExampleScroller extends R.Component {
+class ExampleScroller extends R.PureComponent {
   state = {
     oneToTen: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     mod: {
@@ -50,7 +50,7 @@ class ExampleScroller extends R.Component {
 
   updateModifier = num => {
     this.setState(state => {
-      let newMod = Object.keys(state.mod).reduce((acc, key) => {
+      const newMod = Object.keys(state.mod).reduce((acc, key) => {
         if (state.mod[key].props.style.background === 'black') return acc;
         acc[key] = state.mod[key];
         return acc;
@@ -61,10 +61,10 @@ class ExampleScroller extends R.Component {
   };
 
   render() {
-    let { oneToTen, mod, options } = this.state;
+    const { oneToTen, mod } = this.state;
     return (
       <div style={{ width: '500px' }}>
-        <Scroller values={oneToTen} modifiers={mod} onChange={this.updateModifier} onSlide={this.onSlideTester} />
+        <SFScroller values={oneToTen} modifiers={mod} onChange={this.updateModifier} onSlide={this.onSlideTester} />
       </div>
     );
   }
@@ -74,7 +74,7 @@ export default function DisplayAll() {
   return (
     <div>
       <div style={{ margin: '30px' }}>
-        <h2>Example Scroller</h2>
+        <h2>Example SFScroller</h2>
         <ExampleScroller />
       </div>
       <div style={{ margin: '30px' }}>
@@ -82,14 +82,14 @@ export default function DisplayAll() {
         <ExampleChiclets />
       </div>
       <div style={{ margin: '30px' }}>
-        <h2>Card</h2>
+        <h2>SFCard</h2>
         <ExerciseCard />
       </div>
     </div>
   );
 }
 
-class ExerciseCard extends R.Component {
+class ExerciseCard extends R.PureComponent {
   state = { isExpanded: true };
 
   toggleExpand = () => {
@@ -102,14 +102,14 @@ class ExerciseCard extends R.Component {
 
   render() {
     return (
-      <Card isExpanded={this.state.isExpanded}>
+      <SFCard isExpanded={this.state.isExpanded}>
         <div>
           <div onClick={this.toggleExpand}>Toggle</div>
           <ExampleChiclets />
         </div>
         {this.state.isExpanded && <WorkoutData />}
         <ExampleScroller />
-      </Card>
+      </SFCard>
     );
   }
 }

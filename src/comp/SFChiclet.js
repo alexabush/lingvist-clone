@@ -2,7 +2,7 @@ import R from 'react';
 import T from 'prop-types';
 import { polar1, night1 } from '../colors';
 
-export default class SFCard extends R.PureComponent {
+export default class SFChiclet extends R.Component {
   static propTypes = {
     outline: T.bool,
     selected: T.bool,
@@ -10,19 +10,24 @@ export default class SFCard extends R.PureComponent {
     children: T.any,
   };
 
+  handleClick = () => {
+    const { onClick } = this.props;
+    onClick && onClick();
+  };
+
   render() {
-    let { outline, selected, onClick, children } = this.props;
-    let isOutline = outline ? 'outline' : '';
-    let isSelected = selected ? 'selected' : '';
+    const { outline, selected, children } = this.props;
+    const isOutline = outline ? 'sf-chiclet-outline' : '';
+    const isSelected = selected ? 'sf-chiclet-selected' : '';
     return (
-      <div className={`chiclet-container ${isSelected}`} onClick={onClick}>
-        <div className={`chiclet ${isOutline}`}>{children}</div>
+      <div className={`sf-chiclet-container ${isSelected}`} onClick={this.handleClick}>
+        <div className={`sf-chiclet ${isOutline}`}>{children}</div>
         <style jsx>{`
-          .chiclet-container {
+          .sf-chiclet-container {
             display: inline-block;
             margin: 10px;
           }
-          .chiclet {
+          .sf-chiclet {
             height: 15px;
             width: 15px;
             display: flex;
@@ -33,12 +38,12 @@ export default class SFCard extends R.PureComponent {
             background: ${night1};
             color: ${polar1};
           }
-          .outline {
+          .sf-chiclet-outline {
             border: 2px dotted ${night1};
             background: ${polar1};
             color: ${night1};
           }
-          .selected {
+          .sf-chiclet-selected {
             border: 2px solid ${night1};
             border-radius: 5px;
             background: ${polar1};
