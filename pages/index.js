@@ -1,10 +1,15 @@
-import Card from '../src/comp/Card'
+import Link from 'next/link';
+import Lingvist from './lingvist';
 
-export default () => (
+const Index = () => (
   <div>
-    <Card />
-    <Card />
-    <Card />
-    <Card />
+    <Link href="/lingvist">
+      <a>Language App</a>
+    </Link>
+    <Link href="/levels">
+      <a>Levels</a>
+    </Link>
   </div>
-)
+);
+
+export default Index;

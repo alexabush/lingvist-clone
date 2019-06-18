@@ -1,69 +1,38 @@
-function ProgressDot({ color, isFilled }) {
-  return (
-    <div className="ProgressDot">
-      <style jsx>{`
-        .ProgressDot {
-          height: 10px;
-          width: 10px;
-          background: ${isFilled && color ? color : 'lightgrey'};
-          border-radius: 50%;
-          margin-left: 5px;
-        }
-      `}</style>
-    </div>
-  );
-}
-
-export default function SFProgressCircles({ strength = 2, color = 'turquoise', toggleModal }) {
+export default function SFProgressCircles({ strength = 2, color = 'turquoise' }) {
   function makeDots() {
     let dots = [];
     for (let i = 0; i < 5; i++) {
       if (i < strength) {
-        dots.push(<ProgressDot color={color} isFilled />);
+        dots.push(<ProgressCircle color={color} isFilled />);
       } else {
-        dots.push(<ProgressDot />);
+        dots.push(<ProgressCircle />);
       }
     }
     return dots;
   }
   return (
-    <div onClick={toggleModal} className="ProgressDots">
+    <div className="SFProgressCircles">
       {makeDots()}
-      <ProgressInfo />
       <style jsx>{`
-        .ProgressDots {
+        .SFProgressCircles {
           display: flex;
-          margin: 0 10px;
-          padding: 5px 0;
           align-items: center;
-        }
-        .ProgressDots:hover .ProgressInfo {
-          display: block;
-        }
-        .ProgressDots:hover {
-          cursor: pointer;
-          background: tan;
-        }
-
-        .ProgressInfo span {
-          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
       `}</style>
     </div>
   );
 }
-function ProgressInfo() {
+
+function ProgressCircle({ color, isFilled }) {
   return (
-    <div className="ProgressInfo">
-      This work needs more practice <span>Find out more</span>
+    <div className="ProgressCircle">
       <style jsx>{`
-        .ProgressInfo {
-          font-size: 0.8rem;
-          // display: none;
-          margin: 0 10px;
-        }
-        .ProgressDots:hover .ProgressInfo {
-          display: block;
+        .ProgressCircle {
+          height: 10px;
+          width: 10px;
+          background: ${isFilled && color ? color : 'lightgrey'};
+          border-radius: 50%;
+          margin-left: 5px;
         }
       `}</style>
     </div>
