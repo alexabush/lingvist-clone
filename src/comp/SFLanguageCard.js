@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import SFProgressCircles from './SFProgressCircles';
 import SFTooltip from './SFTooltip';
 import { frost1, frost2, frost3, frost4, polar1, polar2, polar3, polar4, green } from '../colors';
 
-export default function SFLanguageCard({ cardData = {}, toggleModal }) {
+export default function SFLanguageCard({ cardData = {} }) {
   const { spanishArticle, spanishWord, englishWord, numberTimesSeen, wordDetails, partOfSpeech } = cardData;
   return (
     <div className="SFLanguageCard">
-      <CardHeader englishWord={englishWord} toggleModal={toggleModal} />
+      <SFLanguageCardHeader englishWord={englishWord} />
       <WordInput spanishArticle={spanishArticle} spanishWord={spanishWord} />
       <SFLanguageCardFooter wordDetails={wordDetails} description="^" partOfSpeech={partOfSpeech} />
       <style jsx>{`
         .SFLanguageCard {
           position: relative;
           background: ${polar1};
-          width: 450px;
-          height: 125px;
+          width: 560px;
+          height: 150px;
           box-shadow: 0 8px 6px -6px black;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           box-sizing: border-box;
-          padding: 5px 10px;
+          padding: 0px 10px;
           border-radius: 10px;
         }
       `}</style>
@@ -29,18 +30,27 @@ export default function SFLanguageCard({ cardData = {}, toggleModal }) {
   );
 }
 
-function CardHeader({ englishWord, toggleModal }) {
+function SFLanguageCardHeader({ englishWord }) {
   const [isShow, setIsShow] = useState(false);
   const toggleShow = () => {
     setIsShow(!isShow);
   };
   return (
-    <div className="CardHeader">
+    <div className="SFLanguageCardHeader">
       <p className={`header ${isShow || 'hideHeader'}`}>{englishWord && englishWord[0]}</p>
-      <SFProgressCircles strength={3} toggleModal={toggleModal} />
+      <Link href="/levels">
+        <div className="SFLanguageCard--ProgressInfo-container">
+          <div className="SFLanguageCard--ProgressCircles-container">
+            <SFProgressCircles strength={3} />
+          </div>
+          <div className="ProgressInfo">
+            This work needs more practice. <span>Find out more</span>
+          </div>
+        </div>
+      </Link>
       <ToggleEnglishWord isShow={isShow} toggleShow={toggleShow} />
       <style jsx>{`
-        .CardHeader {
+        .SFLanguageCardHeader {
           display: flex;
           justify-content: space-between;
         }
@@ -50,15 +60,38 @@ function CardHeader({ englishWord, toggleModal }) {
           transition: all 500ms;
           font-size: 1rem;
         }
-
         .hideHeader {
           transform: translateY(20px);
           opacity: 0;
+        }
+        .SFLanguageCard--ProgressInfo-container {
+          display: flex;
+          align-items: center;
+          border-radius: 5px;
+          padding: 5px 0px;
+        }
+        .SFLanguageCard--ProgressInfo-container:hover {
+          cursor: pointer;
+          background: ${polar2};
+          transition: background 300ms, opacity 300ms;
+        }
+        .SFLanguageCard--ProgressInfo-container:hover .ProgressInfo {
+          opacity: 1;
+        }
+        .ProgressInfo {
+          font-size: 0.8rem;
+          opacity: 0;
+          padding-left: 10px;
+          padding-right: 3px;
+        }
+        .ProgressInfo span {
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
       `}</style>
     </div>
   );
 }
+
 function ToggleEnglishWord({ toggleShow }) {
   return (
     <div className="ToggleEnglishWord" onClick={toggleShow}>
@@ -118,6 +151,7 @@ class WordInputField extends React.Component {
 function SFLanguageCardFooter({ wordDetails, description, partOfSpeech }) {
   const [showAdditionalLetters, setShowAdditionalLetters] = useState(false);
   const toggleShowAdditionalLetters = () => {
+    console.log('toggle');
     setShowAdditionalLetters(!showAdditionalLetters);
   };
   return (
@@ -130,14 +164,17 @@ function SFLanguageCardFooter({ wordDetails, description, partOfSpeech }) {
           {description}
         </SFTooltip>
       </div>
+
       <div>
         <div onClick={toggleShowAdditionalLetters}>En</div>
         <AdditionalLetterPicker isShow={showAdditionalLetters} />
       </div>
+
       <style jsx>{`
         .SFLanguageCardFooter {
           display: flex;
           justify-content: space-between;
+          padding: 10px 15px;
         }
         .SFLanguageCardFooter--wordData-container {
           display: flex;
@@ -160,9 +197,8 @@ function AdditionalLetterPicker({ isShow = false }) {
       <style jsx>{`
         .AdditionalLetterPicker {
           display: ${isShow ? 'flex' : 'none'};
-          display: flex;
           justify-content: space-between;
-          width: 450px;
+          width: 560px;
           height: 75px;
           padding: 0 80px;
           box-sizing: border-box;
@@ -170,7 +206,7 @@ function AdditionalLetterPicker({ isShow = false }) {
           border-radius: 5px;
           position: absolute;
           left: 0px;
-          top: calc(100% + 20px);
+          top: calc(100% + 25px);
           z-index: 1;
         }
         .AdditionalLetterPicker::after {
@@ -180,7 +216,7 @@ function AdditionalLetterPicker({ isShow = false }) {
           border-color: transparent transparent ${frost4} transparent;
           position: absolute;
           top: -15px;
-          right: calc(10px);
+          right: calc(25px);
         }
       `}</style>
     </div>

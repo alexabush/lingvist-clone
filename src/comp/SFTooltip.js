@@ -23,9 +23,9 @@ export default function Tooltip({ display = 'hello world', direction = 'bottom',
           background: ${polar1};
           color: ${night4};
           padding: 5px 20px;
-          border-radius: 5px;
+          border-radius: 3px;
           position: absolute;
-          box-shadow: 3px 3px 3px 1px ${night4};
+          box-shadow: 3px 3px 5px -3px ${night4};
         }
         .Tooltip::after {
           display: none;
