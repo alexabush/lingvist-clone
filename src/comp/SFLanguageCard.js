@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import SFProgressCircles from './SFProgressCircles';
 import SFTooltip from './SFTooltip';
+import { frost1, frost2, frost3, frost4, polar1, polar2, polar3, polar4, green } from '../colors';
 
-export default function Card({ english = 'english word', toggleModal }) {
+export default function SFLanguageCard({ cardData = {}, toggleModal }) {
+  const { spanishArticle, spanishWord, englishWord, numberTimesSeen, wordDetails, partOfSpeech } = cardData;
   return (
-    <div className="Card">
-      <CardHeader english={english} toggleModal={toggleModal} />
-      <WordInput />
-      <SFLanguageCardFooter description="^" partOfSpeech={'n'} />
+    <div className="SFLanguageCard">
+      <CardHeader englishWord={englishWord} toggleModal={toggleModal} />
+      <WordInput spanishArticle={spanishArticle} spanishWord={spanishWord} />
+      <SFLanguageCardFooter wordDetails={wordDetails} description="^" partOfSpeech={partOfSpeech} />
       <style jsx>{`
-        .Card {
+        .SFLanguageCard {
           position: relative;
-          background: white;
+          background: ${polar1};
           width: 450px;
           height: 125px;
           box-shadow: 0 8px 6px -6px black;
@@ -20,20 +22,21 @@ export default function Card({ english = 'english word', toggleModal }) {
           justify-content: space-between;
           box-sizing: border-box;
           padding: 5px 10px;
+          border-radius: 10px;
         }
       `}</style>
     </div>
   );
 }
 
-function CardHeader({ english, toggleModal }) {
+function CardHeader({ englishWord, toggleModal }) {
   const [isShow, setIsShow] = useState(false);
   const toggleShow = () => {
     setIsShow(!isShow);
   };
   return (
     <div className="CardHeader">
-      <p className={`header ${isShow || 'hideHeader'}`}>{english}</p>
+      <p className={`header ${isShow || 'hideHeader'}`}>{englishWord && englishWord[0]}</p>
       <SFProgressCircles strength={3} toggleModal={toggleModal} />
       <ToggleEnglishWord isShow={isShow} toggleShow={toggleShow} />
       <style jsx>{`
@@ -64,14 +67,11 @@ function ToggleEnglishWord({ toggleShow }) {
   );
 }
 
-function WordInput() {
-  // let { article, word } = this.props;
-  let article = 'el';
-  let word = 'goberieno';
+function WordInput({ spanishArticle, spanishWord }) {
   return (
     <div className="WordInput">
-      <div className="article">{article}</div>
-      <WordInputField word={word} />
+      <div className="article">{spanishArticle}</div>
+      <WordInputField spanishWord={spanishWord} />
       <style jsx>{`
         .WordInput {
           display: inline-block;
@@ -96,23 +96,18 @@ class WordInputField extends React.Component {
   };
 
   render() {
-    let { word } = this.props;
+    let { spanishWord } = this.props;
     let { value, giveHelp } = this.state;
     return (
       <div className="WordInputField">
         <form onSubmit={this.handleSubmit}>
-          {/* <div className="CompletedWord">
-            {customValue(value, word)}
-          </div> */}
           <input type="text" value={value} onChange={this.handleChange} />
         </form>
         {this.state.giveHelp && <div>first</div>}
         <style jsx>{`
           .WordInputField {
-            /* display: relative; */
             display: inline-block;
             font-family: monospace;
-            /* border: 1px solid red; */
           }
         `}</style>
       </div>
@@ -120,7 +115,7 @@ class WordInputField extends React.Component {
   }
 }
 
-function SFLanguageCardFooter({ description, partOfSpeech }) {
+function SFLanguageCardFooter({ wordDetails, description, partOfSpeech }) {
   const [showAdditionalLetters, setShowAdditionalLetters] = useState(false);
   const toggleShowAdditionalLetters = () => {
     setShowAdditionalLetters(!showAdditionalLetters);
@@ -128,8 +123,8 @@ function SFLanguageCardFooter({ description, partOfSpeech }) {
   return (
     <div className="SFLanguageCardFooter">
       <div className="SFLanguageCardFooter--wordData-container">
-        <SFTooltip display="masculine, singular" direction="top" width={130}>
-          {partOfSpeech}
+        <SFTooltip display={wordDetails} direction="top" width={130}>
+          P
         </SFTooltip>
         <SFTooltip display="Noun" direction="top" width={40}>
           {description}
@@ -143,7 +138,6 @@ function SFLanguageCardFooter({ description, partOfSpeech }) {
         .SFLanguageCardFooter {
           display: flex;
           justify-content: space-between;
-          border: 1px solid red;
         }
         .SFLanguageCardFooter--wordData-container {
           display: flex;
@@ -166,22 +160,24 @@ function AdditionalLetterPicker({ isShow = false }) {
       <style jsx>{`
         .AdditionalLetterPicker {
           display: ${isShow ? 'flex' : 'none'};
+          display: flex;
           justify-content: space-between;
           width: 450px;
           height: 75px;
-          padding: 20px 120px;
+          padding: 0 80px;
           box-sizing: border-box;
-          background: darkblue;
+          background: ${frost4};
           border-radius: 5px;
           position: absolute;
           left: 0px;
           top: calc(100% + 20px);
+          z-index: 1;
         }
         .AdditionalLetterPicker::after {
           content: '';
           border-style: solid;
           border-width: 0px 14px 16px 14px;
-          border-color: transparent transparent darkblue transparent;
+          border-color: transparent transparent ${frost4} transparent;
           position: absolute;
           top: -15px;
           right: calc(10px);
@@ -193,7 +189,7 @@ function AdditionalLetterPicker({ isShow = false }) {
 
 function AdditionalLetter({ letter, num }) {
   return (
-    <div>
+    <div className="AdditionalLetter">
       <div className="AdditionalLetter--letter">{letter}</div>
       <div className="AdditionalLetter--number">{num}</div>
       <style jsx>{`
@@ -202,8 +198,18 @@ function AdditionalLetter({ letter, num }) {
         justify-content: center;
         align-items: center;
         color: white;
+        border-radius: 5px;
+
+        .AdditionalLetter {
+          padding: 5px 15px;
+          align-self: center;
+        }
+        .AdditionalLetter:hover {
+          background: ${frost3};
+        }
         .AdditionalLetter--letter {
           font-size: 1.25rem;
+          margin-bottom: 10px;
         }
         .AdditionalLetter--number {
           font-size: 0.5rem;

@@ -1,15 +1,10 @@
 import react from 'react';
+import { frost1, frost2, frost3, frost4, polar1, polar2, polar3, polar4, green, night4 } from '../colors';
 
-export default function Tooltip({
-  display = 'hello world',
-  direction = 'bottom',
-  color = 'blue',
-  width = 100,
-  children,
-}) {
+export default function Tooltip({ display = 'hello world', direction = 'bottom', width = 100, children }) {
   return (
     <div className={`Tooltip-container Tooltip-${direction}`}>
-      <div data-color={color} className="Tooltip" data-display={display} />
+      <div className="Tooltip" data-display={display} />
       {children}
       <style jsx>{`
         .Tooltip-container {
@@ -25,11 +20,12 @@ export default function Tooltip({
           display: none;
           width: ${width}px;
           content: attr(data-display);
-          background: ${color};
-          color: white;
+          background: ${polar1};
+          color: ${night4};
           padding: 5px 20px;
           border-radius: 5px;
           position: absolute;
+          box-shadow: 3px 3px 3px 1px ${night4};
         }
         .Tooltip::after {
           display: none;
@@ -44,7 +40,7 @@ export default function Tooltip({
         }
         .Tooltip-top .Tooltip::after {
           border-width: 8px 6px 0px 6px;
-          border-color: ${color} transparent transparent transparent;
+          border-color: ${polar1} transparent transparent transparent;
           top: -12px;
           left: calc(-50%);
         }
