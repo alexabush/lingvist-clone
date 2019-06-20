@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import SFProgressCircles from './SFProgressCircles';
 import SFTooltip from './SFTooltip';
-import { frost1, frost2, frost3, frost4, polar1, polar2, polar3, polar4, green } from '../colors';
+import { frost3, frost4, polar1, polar2 } from '../colors';
 
 export default function SFLanguageCard({ card = {} }) {
-  const { spanishArticle, spanishWord, englishWord, wordStrength, wordDetails, partOfSpeech } = card;
+  const { spanishWord, spanishPhrase, englishPhrase, englishWord, wordStrength, wordDetails, partOfSpeech } = card;
   return (
     <div className="SFLanguageCard">
-      <SFLanguageCardHeader englishWord={englishWord} wordStrength={wordStrength} />
-      <WordInput spanishArticle={spanishArticle} spanishWord={spanishWord} />
+      <SFLanguageCardHeader englishPhrase={englishPhrase} wordStrength={wordStrength} />
+      <WordInput spanishWord={spanishWord} spanishPhrase={spanishPhrase} englishWord={englishWord} />
       <SFLanguageCardFooter wordDetails={wordDetails} description="^" partOfSpeech={partOfSpeech} />
       <style jsx>{`
         .SFLanguageCard {
@@ -30,29 +30,18 @@ export default function SFLanguageCard({ card = {} }) {
   );
 }
 
-function SFLanguageCardHeader({ englishWord, wordStrength }) {
+function SFLanguageCardHeader({ englishPhrase, wordStrength }) {
   const [isShow, setIsShow] = useState(false);
   const toggleShow = () => {
     setIsShow(!isShow);
   };
   return (
     <div className="SFLanguageCardHeader">
-      <p className={`header ${isShow || 'hideHeader'}`}>{englishWord && englishWord[0]}</p>
+      <p className={`header ${isShow || 'hideHeader'}`}>{englishPhrase && englishPhrase}</p>
       <Link href="/levels">
-        <div className="SFLanguageCard--ProgressInfo-container">
-          <div className="SFLanguageCard--ProgressCircles-container">
-            <SFProgressCircles wordStrength={wordStrength} />
-          </div>
-          <div className="SFLanguageCard--ProgressInfo">
-            {wordStrength === 1 && 'New Word '}
-            <span className="SFLanguageCard--ProgressInfo--text">
-              {wordStrength !== 1 && 'This work needs more practice. '}
-              Find out more
-            </span>
-          </div>
-        </div>
+        <SFProgressInfo wordStrength={wordStrength} />
       </Link>
-      <ToggleEnglishWord isShow={isShow} toggleShow={toggleShow} />
+      <ToggleEnglishPhrase isShow={isShow} toggleShow={toggleShow} />
       <style jsx>{`
         .SFLanguageCardHeader {
           display: flex;
@@ -69,6 +58,25 @@ function SFLanguageCardHeader({ englishWord, wordStrength }) {
           transform: translateY(20px);
           opacity: 0;
         }
+      `}</style>
+    </div>
+  );
+}
+
+function SFProgressInfo({ wordStrength }) {
+  return (
+    <div className="SFLanguageCard--ProgressInfo-container">
+      <div className="SFLanguageCard--ProgressCircles-container">
+        <SFProgressCircles wordStrength={wordStrength} />
+      </div>
+      <div className="SFLanguageCard--ProgressInfo">
+        {wordStrength === 1 && 'New Word '}
+        <span className="SFLanguageCard--ProgressInfo--text">
+          {wordStrength !== 1 && 'This word needs more practice. '}
+          Find out more
+        </span>
+      </div>
+      <style jsx>{`
         .SFLanguageCard--ProgressInfo-container {
           display: flex;
           align-items: center;
@@ -98,22 +106,27 @@ function SFLanguageCardHeader({ englishWord, wordStrength }) {
   );
 }
 
-function ToggleEnglishWord({ toggleShow }) {
+function ToggleEnglishPhrase({ toggleShow }) {
   return (
-    <div className="ToggleEnglishWord" onClick={toggleShow}>
+    <div className="ToggleEnglishPhrase" onClick={toggleShow}>
       ^<style jsx>{``}</style>
     </div>
   );
 }
 
-function WordInput({ spanishArticle, spanishWord }) {
+function WordInput({ spanishWord = '', spanishPhrase = '' }) {
+  let [front, end] = spanishPhrase.split('*');
   return (
     <div className="WordInput">
-      <div className="article">{spanishArticle}</div>
-      <WordInputField spanishWord={spanishWord} />
+      <div className="article">
+        <span>{front}</span>
+        <WordInputField spanishWord={spanishWord} />
+        <span>{end}</span>
+      </div>
       <style jsx>{`
         .WordInput {
           display: inline-block;
+          color: green;
         }
         .article {
           display: inline-block;
@@ -133,20 +146,43 @@ class WordInputField extends React.Component {
     e.preventDefault();
     this.setState({ value: '', giveHelp: true });
   };
+  generateLetters = spanishWord => {
+    let letterEls = [];
+    for (let letter of spanishWord) {
+      letterEls.push(<span className="spans">{letter}</span>);
+    }
+    return letterEls;
+  };
 
   render() {
-    let { spanishWord } = this.props;
     let { value, giveHelp } = this.state;
+    let { spanishWord } = this.props;
+    let letterEls = this.generateLetters(spanishWord);
     return (
       <div className="WordInputField">
         <form onSubmit={this.handleSubmit}>
+          {giveHelp && <span className="WordInputField--letter-container">{letterEls}</span>}
           <input type="text" value={value} onChange={this.handleChange} />
         </form>
-        {this.state.giveHelp && <div>first</div>}
         <style jsx>{`
           .WordInputField {
             display: inline-block;
             font-family: monospace;
+          }
+          .WordInputField--letter-container {
+            position: absolute;
+          }
+          input {
+            border: none;
+            background: ${polar2};
+            width: calc(${spanishWord.length} * 0.5rem);
+          }
+          input:focus {
+            outline: none;
+          }
+          .WordInputField span {
+            opacity: 0.5;
+            pointer-events: none;
           }
         `}</style>
       </div>
@@ -154,10 +190,9 @@ class WordInputField extends React.Component {
   }
 }
 
-function SFLanguageCardFooter({ wordDetails, description, partOfSpeech }) {
+function SFLanguageCardFooter({ wordDetails, description }) {
   const [showAdditionalLetters, setShowAdditionalLetters] = useState(false);
   const toggleShowAdditionalLetters = () => {
-    console.log('toggle');
     setShowAdditionalLetters(!showAdditionalLetters);
   };
   return (

@@ -1,16 +1,18 @@
 export default {
   data: [
     {
-      spanishArticle: 'el',
       spanishWord: 'trabajo',
+      spanishPhrase: 'El * duro',
+      englishPhrase: 'The hard work',
       englishWord: ['the work', 'the job'],
       wordStrength: 1,
       wordDetails: 'masculine, singular',
       partOfSpeech: 'Noun',
     },
     {
-      spanishArticle: 'una',
       spanishWord: 'vez',
+      spanishPhrase: 'Una otra vez',
+      englishPhrase: 'One more time',
       englishWord: ['once'],
       wordStrength: 4,
       wordDetails: 'feminine, singular',
