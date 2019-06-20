@@ -106,10 +106,21 @@ function SFProgressInfo({ wordStrength }) {
   );
 }
 
-function ToggleEnglishPhrase({ toggleShow }) {
+function ToggleEnglishPhrase({ isShow, toggleShow }) {
+  const handleClick = () => {
+    toggleShow();
+  };
   return (
-    <div className="ToggleEnglishPhrase" onClick={toggleShow}>
-      ^<style jsx>{``}</style>
+    <div className={`ToggleEnglishPhrase ${isShow && 'ToggleEnglishPhrase--flip'}`} onClick={handleClick}>
+      ^
+      <style jsx>{`
+        .ToggleEnglishPhrase {
+          transition: transform 300ms;
+        }
+        .ToggleEnglishPhrase--flip {
+          transform: rotate(180deg);
+        }
+      `}</style>
     </div>
   );
 }
