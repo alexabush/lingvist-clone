@@ -38,7 +38,7 @@ export default class App extends React.Component {
         <div />
         <div className="Lingvist--container">
           <ArrowWrapper onLeftClick={this.handleLeftClick} onRightClick={this.handleRightClick}>
-            <SFLanguageCard cardData={words[currentIndex]} toggleModal={this.toggleModal} />
+            <SFLanguageCard card={words[currentIndex]} toggleModal={this.toggleModal} />
           </ArrowWrapper>
           <div className="english-word">{words[currentIndex] && words[currentIndex].englishWord.join(', ')}</div>
         </div>

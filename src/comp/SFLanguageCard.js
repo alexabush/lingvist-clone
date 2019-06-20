@@ -4,11 +4,11 @@ import SFProgressCircles from './SFProgressCircles';
 import SFTooltip from './SFTooltip';
 import { frost1, frost2, frost3, frost4, polar1, polar2, polar3, polar4, green } from '../colors';
 
-export default function SFLanguageCard({ cardData = {} }) {
-  const { spanishArticle, spanishWord, englishWord, numberTimesSeen, wordDetails, partOfSpeech } = cardData;
+export default function SFLanguageCard({ card = {} }) {
+  const { spanishArticle, spanishWord, englishWord, wordStrength, wordDetails, partOfSpeech } = card;
   return (
     <div className="SFLanguageCard">
-      <SFLanguageCardHeader englishWord={englishWord} />
+      <SFLanguageCardHeader englishWord={englishWord} wordStrength={wordStrength} />
       <WordInput spanishArticle={spanishArticle} spanishWord={spanishWord} />
       <SFLanguageCardFooter wordDetails={wordDetails} description="^" partOfSpeech={partOfSpeech} />
       <style jsx>{`
@@ -30,7 +30,7 @@ export default function SFLanguageCard({ cardData = {} }) {
   );
 }
 
-function SFLanguageCardHeader({ englishWord }) {
+function SFLanguageCardHeader({ englishWord, wordStrength }) {
   const [isShow, setIsShow] = useState(false);
   const toggleShow = () => {
     setIsShow(!isShow);
@@ -41,10 +41,14 @@ function SFLanguageCardHeader({ englishWord }) {
       <Link href="/levels">
         <div className="SFLanguageCard--ProgressInfo-container">
           <div className="SFLanguageCard--ProgressCircles-container">
-            <SFProgressCircles strength={3} />
+            <SFProgressCircles wordStrength={wordStrength} />
           </div>
-          <div className="ProgressInfo">
-            This work needs more practice. <span>Find out more</span>
+          <div className="SFLanguageCard--ProgressInfo">
+            {wordStrength === 1 && 'New Word '}
+            <span className="SFLanguageCard--ProgressInfo--text">
+              {wordStrength !== 1 && 'This work needs more practice. '}
+              Find out more
+            </span>
           </div>
         </div>
       </Link>
@@ -53,6 +57,7 @@ function SFLanguageCardHeader({ englishWord }) {
         .SFLanguageCardHeader {
           display: flex;
           justify-content: space-between;
+          padding: 5px 5px 0px 25px;
         }
         .header {
           position: absolute;
@@ -68,23 +73,24 @@ function SFLanguageCardHeader({ englishWord }) {
           display: flex;
           align-items: center;
           border-radius: 5px;
-          padding: 5px 0px;
         }
         .SFLanguageCard--ProgressInfo-container:hover {
           cursor: pointer;
           background: ${polar2};
           transition: background 300ms, opacity 300ms;
         }
-        .SFLanguageCard--ProgressInfo-container:hover .ProgressInfo {
+        .SFLanguageCard--ProgressInfo-container:hover .SFLanguageCard--ProgressInfo--text {
           opacity: 1;
         }
-        .ProgressInfo {
+        .SFLanguageCard--ProgressInfo {
           font-size: 0.8rem;
-          opacity: 0;
           padding-left: 10px;
           padding-right: 3px;
         }
-        .ProgressInfo span {
+        .SFLanguageCard--ProgressInfo--text {
+          opacity: 0;
+        }
+        .SFLanguageCard--ProgressInfo span {
           font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
       `}</style>

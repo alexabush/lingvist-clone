@@ -68,11 +68,11 @@ function RepetitionInfo() {
   );
 }
 
-function RepetitionInfoLevel({ text, num, color }) {
+function RepetitionInfoLevel({ text, num }) {
   return (
     <div className="RepetitionInfoLevel">
       <div className="SFProgressCircles--container">
-        <SFProgressCircles strength={num} color={color} />
+        <SFProgressCircles wordStrength={num} />
       </div>
       <div className="infoText">{text}</div>
       <style jsx>{`
