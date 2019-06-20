@@ -1,8 +1,11 @@
-export default function SFProgressCircles({ strength = 2, color = 'turquoise' }) {
+export default function SFProgressCircles({ wordStrength }) {
+  const colors = ['orange', 'purple', 'red', 'turquoise', 'green'];
+
   function makeDots() {
     let dots = [];
+    let color = colors[wordStrength - 1];
     for (let i = 0; i < 5; i++) {
-      if (i < strength) {
+      if (i < wordStrength) {
         dots.push(<ProgressCircle color={color} isFilled />);
       } else {
         dots.push(<ProgressCircle />);
@@ -28,8 +31,8 @@ function ProgressCircle({ color, isFilled }) {
     <div className="ProgressCircle">
       <style jsx>{`
         .ProgressCircle {
-          height: 10px;
-          width: 10px;
+          height: 9px;
+          width: 9px;
           background: ${isFilled && color ? color : 'lightgrey'};
           border-radius: 50%;
           margin-left: 5px;
