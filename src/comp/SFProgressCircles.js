@@ -6,9 +6,9 @@ export default function SFProgressCircles({ wordStrength }) {
     let color = colors[wordStrength - 1];
     for (let i = 0; i < 5; i++) {
       if (i < wordStrength) {
-        dots.push(<ProgressCircle color={color} isFilled />);
+        dots.push(<ProgressCircle key={i} color={color} isFilled />);
       } else {
-        dots.push(<ProgressCircle />);
+        dots.push(<ProgressCircle key={i} />);
       }
     }
     return dots;

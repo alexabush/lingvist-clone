@@ -4,12 +4,17 @@ import SFProgressCircles from './SFProgressCircles';
 import SFTooltip from './SFTooltip';
 import { frost3, frost4, polar1, polar2 } from '../colors';
 
-export default function SFLanguageCard({ card = {} }) {
+export default function SFLanguageCard({ card = {}, handleSuccess }) {
   const { spanishWord, spanishPhrase, englishPhrase, englishWord, wordStrength, wordDetails, partOfSpeech } = card;
   return (
     <div className="SFLanguageCard">
       <SFLanguageCardHeader englishPhrase={englishPhrase} wordStrength={wordStrength} />
-      <WordInput spanishWord={spanishWord} spanishPhrase={spanishPhrase} englishWord={englishWord} />
+      <WordInput
+        spanishWord={spanishWord}
+        spanishPhrase={spanishPhrase}
+        englishWord={englishWord}
+        handleSuccess={handleSuccess}
+      />
       <SFLanguageCardFooter wordDetails={wordDetails} description="^" partOfSpeech={partOfSpeech} />
       <style jsx>{`
         .SFLanguageCard {
@@ -127,13 +132,13 @@ function ToggleEnglishPhrase({ isShow, toggleShow }) {
   );
 }
 
-function WordInput({ spanishWord = '', spanishPhrase = '' }) {
+function WordInput({ spanishWord = '', spanishPhrase = '', handleSuccess }) {
   let [front, end] = spanishPhrase.split('*');
   return (
     <div className="WordInput">
       <div className="article">
         <span>{front}</span>
-        <WordInputField spanishWord={spanishWord} />
+        <WordInputField spanishWord={spanishWord} handleSuccess={handleSuccess} />
         <span>{end}</span>
       </div>
       <style jsx>{`
@@ -156,25 +161,28 @@ class WordInputField extends React.Component {
     this.setState({ value: e.target.value });
   };
   handleSubmit = e => {
-    const { spanishWord, onSuccess } = this.props;
+    const { spanishWord, handleSuccess } = this.props;
     const { value } = this.state;
     e.preventDefault();
     if (value !== spanishWord) {
       this.setState({ value: '', giveHelp: true });
     } else {
+      handleSuccess();
     }
   };
   generateLetters = spanishWord => {
-    let letterEls = [];
-    for (let letter of spanishWord) {
-      letterEls.push(<span className="spans">{letter}</span>);
-    }
-    return letterEls;
+    return spanishWord.split('').map((letter, i) => {
+      return (
+        <span key={i} className="spans">
+          {letter}
+        </span>
+      );
+    });
   };
 
   render() {
     let { value, giveHelp } = this.state;
-    let { spanishWord } = this.props;
+    let { spanishWord, handleSuccess } = this.props;
     let letterEls = this.generateLetters(spanishWord);
     return (
       <div className="WordInputField">
