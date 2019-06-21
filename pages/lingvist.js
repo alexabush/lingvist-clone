@@ -11,7 +11,7 @@ export default class App extends React.Component {
   state = {
     showModal: false,
     words: [],
-    currentIndex: 1,
+    currentIndex: 0,
     isPrev: false,
   };
 
@@ -31,7 +31,13 @@ export default class App extends React.Component {
     if (this.state.currentIndex >= this.state.words.length - 1) return;
     if (this.state.isPrev) {
       this.setState({ isPrev: false, currentIndex: this.state.currentIndex + 1 });
+    } else {
+      console.log('need to make change');
+      return;
     }
+  };
+  handleSuccess = () => {
+    this.setState({ currentIndex: this.state.currentIndex + 1 });
   };
   render() {
     const { showModal, words, currentIndex, isPrev } = this.state;
@@ -44,7 +50,11 @@ export default class App extends React.Component {
         <div />
         <div className="Lingvist--container">
           <NavArrows isPrev={isPrev} onLeftClick={this.handleLeftClick} onRightClick={this.handleRightClick}>
-            <SFLanguageCard card={words[currentIndex]} toggleModal={this.toggleModal} />
+            <SFLanguageCard
+              card={words[currentIndex]}
+              toggleModal={this.toggleModal}
+              handleSuccess={this.handleSuccess}
+            />
           </NavArrows>
           <div className="english-word">{words[currentIndex] && words[currentIndex].englishWord.join(', ')}</div>
         </div>
