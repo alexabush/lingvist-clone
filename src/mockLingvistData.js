@@ -11,7 +11,7 @@ export default {
     },
     {
       spanishWord: 'vez',
-      spanishPhrase: 'Una otra vez',
+      spanishPhrase: 'Una otra *',
       englishPhrase: 'One more time',
       englishWord: ['once'],
       wordStrength: 4,
