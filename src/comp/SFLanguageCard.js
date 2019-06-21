@@ -156,8 +156,13 @@ class WordInputField extends React.Component {
     this.setState({ value: e.target.value });
   };
   handleSubmit = e => {
+    const { spanishWord, onSuccess } = this.props;
+    const { value } = this.state;
     e.preventDefault();
-    this.setState({ value: '', giveHelp: true });
+    if (value !== spanishWord) {
+      this.setState({ value: '', giveHelp: true });
+    } else {
+    }
   };
   generateLetters = spanishWord => {
     let letterEls = [];

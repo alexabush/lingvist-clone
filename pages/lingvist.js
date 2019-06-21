@@ -11,7 +11,8 @@ export default class App extends React.Component {
   state = {
     showModal: false,
     words: [],
-    currentIndex: 0,
+    currentIndex: 1,
+    isPrev: false,
   };
 
   componentDidMount() {
@@ -23,14 +24,17 @@ export default class App extends React.Component {
   };
   handleLeftClick = () => {
     if (this.state.currentIndex < 1) return;
-    this.setState({ currentIndex: this.state.currentIndex - 1 });
+    if (this.state.isPrev) return;
+    this.setState({ isPrev: true, currentIndex: this.state.currentIndex - 1 });
   };
   handleRightClick = () => {
     if (this.state.currentIndex >= this.state.words.length - 1) return;
-    this.setState({ currentIndex: this.state.currentIndex + 1 });
+    if (this.state.isPrev) {
+      this.setState({ isPrev: false, currentIndex: this.state.currentIndex + 1 });
+    }
   };
   render() {
-    const { showModal, words, currentIndex } = this.state;
+    const { showModal, words, currentIndex, isPrev } = this.state;
     return showModal ? (
       <SFModal>
         <LevelsInfo toggleModal={this.toggleModal} />
@@ -39,7 +43,7 @@ export default class App extends React.Component {
       <div className="App">
         <div />
         <div className="Lingvist--container">
-          <NavArrows onLeftClick={this.handleLeftClick} onRightClick={this.handleRightClick}>
+          <NavArrows isPrev={isPrev} onLeftClick={this.handleLeftClick} onRightClick={this.handleRightClick}>
             <SFLanguageCard card={words[currentIndex]} toggleModal={this.toggleModal} />
           </NavArrows>
           <div className="english-word">{words[currentIndex] && words[currentIndex].englishWord.join(', ')}</div>
