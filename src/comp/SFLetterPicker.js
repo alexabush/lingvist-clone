@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { frost3, frost4 } from '../colors';
 
 export default function SFLetterPicker() {
@@ -70,3 +72,8 @@ function AdditionalLetter({ letter, num }) {
     </div>
   );
 }
+
+AdditionalLetter.propTypes = {
+  letter: PropTypes.string,
+  num: PropTypes.number
+};

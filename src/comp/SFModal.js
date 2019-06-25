@@ -1,5 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
 export default class SFModal extends React.Component {
   constructor(props) {
@@ -11,3 +12,7 @@ export default class SFModal extends React.Component {
     return createPortal(this.props.children, this.modalRoot);
   }
 }
+
+SFModal.propTypes = {
+  children: PropTypes.node
+};

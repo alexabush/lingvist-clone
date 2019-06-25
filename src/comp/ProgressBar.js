@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { frost2, polar4, green } from '../colors';
 
 export default function ProgressBar({ num }) {
@@ -35,3 +37,7 @@ export default function ProgressBar({ num }) {
     </div>
   );
 }
+
+ProgressBar.propTypes = {
+  num: PropTypes.number
+};
