@@ -1,3 +1,6 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
 export default function SFProgressCircles({ wordStrength }) {
   const colors = ['orange', 'purple', 'red', 'turquoise', 'green'];
 
@@ -26,6 +29,10 @@ export default function SFProgressCircles({ wordStrength }) {
   );
 }
 
+SFProgressCircles.propTypes = {
+  wordStrength: PropTypes.number
+};
+
 function ProgressCircle({ color, isFilled }) {
   return (
     <div className="ProgressCircle">
@@ -41,3 +48,8 @@ function ProgressCircle({ color, isFilled }) {
     </div>
   );
 }
+
+ProgressCircle.propTypes = {
+  color: PropTypes.string,
+  isFilled: PropTypes.bool
+};

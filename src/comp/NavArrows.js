@@ -1,13 +1,26 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { polar4 } from '../colors';
 
-export default function NavArrows({ onLeftClick, onRightClick, isPrev, children }) {
+export default function NavArrows({
+  onLeftClick,
+  onRightClick,
+  isPrev,
+  children
+}) {
   return (
     <div className="NavArrows">
-      <div className="NavArrows--arrow-container arrow-left" onClick={onLeftClick}>
+      <div
+        className="NavArrows--arrow-container arrow-left"
+        onClick={onLeftClick}
+      >
         <div className="arrow">L</div>
       </div>
       {children}
-      <div className="NavArrows--arrow-container arrow-right" onClick={onRightClick}>
+      <div
+        className="NavArrows--arrow-container arrow-right"
+        onClick={onRightClick}
+      >
         <div className="arrow">R</div>
       </div>
       <style jsx>{`
@@ -42,3 +55,10 @@ export default function NavArrows({ onLeftClick, onRightClick, isPrev, children 
     </div>
   );
 }
+
+NavArrows.propTypes = {
+  onLeftClick: PropTypes.func,
+  onRightClick: PropTypes.func,
+  isPrev: PropTypes.bool,
+  children: PropTypes.node
+};

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { frost2, polar4, green, rellow } from '../src/colors';
+import React from 'react';
+import { rellow } from '../src/colors';
 import data from '../src/mockLingvistData';
 import SFModal from '../src/comp/SFModal';
 import NavArrows from '../src/comp/NavArrows';
@@ -10,9 +10,19 @@ import ProgressBar from '../src/comp/ProgressBar';
 export default class App extends React.Component {
   state = {
     showModal: false,
-    words: [],
+    words: [
+      {
+        spanishWord: '',
+        spanishPhrase: '',
+        englishPhrase: '',
+        englishWord: ['', ''],
+        wordStrength: 0,
+        wordDetails: '',
+        partOfSpeech: ''
+      }
+    ],
     currentIndex: 0,
-    isPrev: false,
+    isPrev: false
   };
 
   componentDidMount() {
@@ -30,7 +40,10 @@ export default class App extends React.Component {
   handleRightClick = () => {
     if (this.state.currentIndex >= this.state.words.length - 1) return;
     if (this.state.isPrev) {
-      this.setState({ isPrev: false, currentIndex: this.state.currentIndex + 1 });
+      this.setState({
+        isPrev: false,
+        currentIndex: this.state.currentIndex + 1
+      });
     } else {
       console.log('need to make change');
       return;
@@ -49,14 +62,20 @@ export default class App extends React.Component {
       <div className="App">
         <div />
         <div className="Lingvist--container">
-          <NavArrows isPrev={isPrev} onLeftClick={this.handleLeftClick} onRightClick={this.handleRightClick}>
+          <NavArrows
+            isPrev={isPrev}
+            onLeftClick={this.handleLeftClick}
+            onRightClick={this.handleRightClick}
+          >
             <SFLanguageCard
               card={words[currentIndex]}
               toggleModal={this.toggleModal}
               handleSuccess={this.handleSuccess}
             />
           </NavArrows>
-          <div className="english-word">{words[currentIndex] && words[currentIndex].englishWord.join(', ')}</div>
+          <div className="english-word">
+            {words[currentIndex] && words[currentIndex].englishWord.join(', ')}
+          </div>
         </div>
         <ProgressBar num={currentIndex + 1} />
 
