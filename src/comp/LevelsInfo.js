@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SFProgressCircles from './SFProgressCircles';
 import Link from 'next/link';
-import ProgressBar from './ProgressBar';
 
 export default function LevelsInfo() {
   function stopProp(e) {
@@ -94,11 +93,7 @@ function RepetitionInfo() {
   );
 }
 
-ProgressBar.propTypes = {
-  num: PropTypes.number
-};
-
-function RepetitionInfoLevel({ text, num }) {
+export function RepetitionInfoLevel({ text, num }) {
   return (
     <div className="RepetitionInfoLevel">
       <div className="SFProgressCircles--container">

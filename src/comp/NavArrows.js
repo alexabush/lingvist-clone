@@ -14,7 +14,7 @@ export default function NavArrows({
         className="NavArrows--arrow-container arrow-left"
         onClick={onLeftClick}
       >
-        <div className="arrow">L</div>
+        {isPrev ? null : <div className="arrow">L</div>}
       </div>
       {children}
       <div

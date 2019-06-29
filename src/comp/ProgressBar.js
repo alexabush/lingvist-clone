@@ -5,7 +5,7 @@ import { frost2, polar4, green } from '../colors';
 export default function ProgressBar({ num }) {
   return (
     <div className="progress-bar">
-      <div className="progress-bar--num">{num < 10 ? '0' + num : num}</div>
+      <div className="progress-bar--num">{num < 10 ? '0' + num : '' + num}</div>
       <div className="progress-bar--bar">
         <div className="progress-bar--bar---fill" />
       </div>

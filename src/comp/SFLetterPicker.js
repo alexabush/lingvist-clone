@@ -2,16 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { frost3, frost4 } from '../colors';
 
-export default function SFLetterPicker() {
+export default function SFLetterPicker({ letters }) {
   return (
     <div className="SFLetterPicker">
-      <AdditionalLetter letter={'a'} num={1} />
-      <AdditionalLetter letter={'e'} num={2} />
-      <AdditionalLetter letter={'i'} num={3} />
-      <AdditionalLetter letter={'o'} num={4} />
-      <AdditionalLetter letter={'u'} num={5} />
-      <AdditionalLetter letter={'u'} num={6} />
-      <AdditionalLetter letter={'n'} num={7} />
+      {letters.map(({ letter, num }, i) => {
+        return <AdditionalLetter key={i} letter={letter} num={num} />;
+      })}
       <style jsx>{`
         .SFLetterPicker {
           display: flex;
@@ -41,7 +37,16 @@ export default function SFLetterPicker() {
   );
 }
 
-function AdditionalLetter({ letter, num }) {
+SFLetterPicker.propTypes = {
+  letters: PropTypes.arrayOf(
+    PropTypes.shape({
+      letter: PropTypes.string,
+      num: PropTypes.number
+    })
+  )
+};
+
+export function AdditionalLetter({ letter, num }) {
   return (
     <div className="AdditionalLetter">
       <div className="AdditionalLetter--letter">{letter}</div>
