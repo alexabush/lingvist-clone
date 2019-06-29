@@ -9,9 +9,9 @@ export default function SFProgressCircles({ wordStrength }) {
     let color = colors[wordStrength - 1];
     for (let i = 0; i < 5; i++) {
       if (i < wordStrength) {
-        dots.push(<ProgressCircle key={i} color={color} isFilled />);
+        dots.push(<SFProgressCircle key={i} color={color} isFilled />);
       } else {
-        dots.push(<ProgressCircle key={i} />);
+        dots.push(<SFProgressCircle key={i} />);
       }
     }
     return dots;
@@ -33,11 +33,11 @@ SFProgressCircles.propTypes = {
   wordStrength: PropTypes.number
 };
 
-function ProgressCircle({ color, isFilled }) {
+export function SFProgressCircle({ color, isFilled }) {
   return (
-    <div className="ProgressCircle">
+    <div className="SFProgressCircle">
       <style jsx>{`
-        .ProgressCircle {
+        .SFProgressCircle {
           height: 9px;
           width: 9px;
           background: ${isFilled && color ? color : 'lightgrey'};
@@ -49,7 +49,7 @@ function ProgressCircle({ color, isFilled }) {
   );
 }
 
-ProgressCircle.propTypes = {
+SFProgressCircle.propTypes = {
   color: PropTypes.string,
   isFilled: PropTypes.bool
 };
