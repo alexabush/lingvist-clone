@@ -8,8 +8,8 @@ export default function LevelsInfo() {
     e.stopPropagation();
   }
   return (
-    <div className="LevelsInfo">
-      <div onClick={stopProp} className="LevelsInfoCard">
+    <div className="sf-LevelsInfo">
+      <div onClick={stopProp} className="sf-LevelsInfoCard">
         <h3>The Lingvist levels of learning</h3>
         <p>
           The Lingvist algorithm uses spaced repetition, showing you the words
@@ -36,14 +36,14 @@ export default function LevelsInfo() {
         </Link>
       </div>
       <style jsx>{`
-        .LevelsInfo {
+        .sf-LevelsInfo {
           min-height: 100vh;
           background: darkblue;
           display: flex;
           justify-content: center;
           align-items: center;
         }
-        .LevelsInfoCard {
+        .sf-LevelsInfoCard {
           padding: 5px 30px;
           max-width: 400px;
           max-height: 450px;
@@ -58,7 +58,7 @@ export default function LevelsInfo() {
 
 function RepetitionInfo() {
   return (
-    <div className="RepetitionInfo">
+    <div className="sf-RepetitionInfo">
       <RepetitionInfoLevel
         num={5}
         text="Maximum memory strength!"
@@ -85,7 +85,7 @@ function RepetitionInfo() {
         color="darkorange"
       />
       <style jsx>{`
-        .RepetitionInfo {
+        .sf-RepetitionInfo {
           padding: 3px 0;
         }
       `}</style>
@@ -95,13 +95,13 @@ function RepetitionInfo() {
 
 export function RepetitionInfoLevel({ text, num }) {
   return (
-    <div className="RepetitionInfoLevel">
+    <div className="sf-RepetitionInfoLevel">
       <div className="SFProgressCircles--container">
         <SFProgressCircles wordStrength={num} />
       </div>
       <div className="infoText">{text}</div>
       <style jsx>{`
-        .RepetitionInfoLevel {
+        .sf-RepetitionInfoLevel {
           padding: 3px;
           display: flex;
         }

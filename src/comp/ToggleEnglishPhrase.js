@@ -7,15 +7,16 @@ export default function ToggleEnglishPhrase({ isShow, toggleShow }) {
   };
   return (
     <div
-      className={`ToggleEnglishPhrase ${isShow && 'ToggleEnglishPhrase--flip'}`}
+      className={`sf-ToggleEnglishPhrase ${isShow &&
+        'sf-ToggleEnglishPhrase--flip'}`}
       onClick={handleClick}
     >
       ^
       <style jsx>{`
-        .ToggleEnglishPhrase {
+        .sf-ToggleEnglishPhrase {
           transition: transform 300ms;
         }
-        .ToggleEnglishPhrase--flip {
+        .sf-ToggleEnglishPhrase--flip {
           transform: rotate(180deg);
         }
       `}</style>

@@ -2,7 +2,7 @@ import React from 'react';
 import { rellow } from '../src/colors';
 import data from '../src/mockLingvistData';
 import SFModal from '../src/comp/SFModal';
-import NavArrows from '../src/comp/NavArrows';
+import SFNavArrows from '../src/comp/SFNavArrows';
 import LevelsInfo from '../src/comp/LevelsInfo';
 import SFLanguageCard from '../src/comp/SFLanguageCard';
 import ProgressBar from '../src/comp/ProgressBar';
@@ -62,7 +62,7 @@ export default class App extends React.Component {
       <div className="App">
         <div />
         <div className="Lingvist--container">
-          <NavArrows
+          <SFNavArrows
             isPrev={isPrev}
             onLeftClick={this.handleLeftClick}
             onRightClick={this.handleRightClick}
@@ -72,7 +72,7 @@ export default class App extends React.Component {
               toggleModal={this.toggleModal}
               handleSuccess={this.handleSuccess}
             />
-          </NavArrows>
+          </SFNavArrows>
           <div className="english-word">
             {words[currentIndex] && words[currentIndex].englishWord.join(', ')}
           </div>

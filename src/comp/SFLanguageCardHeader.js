@@ -11,7 +11,7 @@ export default function SFLanguageCardHeader({ englishPhrase, wordStrength }) {
   };
   return (
     <div className="SFLanguageCardHeader">
-      <p className={`header ${isShow || 'hideHeader'}`}>
+      <p className={`sf-header ${isShow || 'sf-hideHeader'}`}>
         {englishPhrase && englishPhrase}
       </p>
       <Link href="/levels">
@@ -26,13 +26,13 @@ export default function SFLanguageCardHeader({ englishPhrase, wordStrength }) {
           justify-content: space-between;
           padding: 5px 5px 0px 25px;
         }
-        .header {
+        .sf-header {
           position: absolute;
           top: -80px;
           transition: all 500ms;
           font-size: 1rem;
         }
-        .hideHeader {
+        .sf-hideHeader {
           transform: translateY(20px);
           opacity: 0;
         }

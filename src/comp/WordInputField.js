@@ -20,7 +20,7 @@ export default class WordInputField extends React.Component {
   generateLetters = spanishWord => {
     return spanishWord.split('').map((letter, i) => {
       return (
-        <span key={i} className="spans">
+        <span key={i} className="sf-spans">
           {letter}
         </span>
       );
@@ -32,21 +32,21 @@ export default class WordInputField extends React.Component {
     const { spanishWord = '' } = this.props;
     const letterEls = this.generateLetters(spanishWord);
     return (
-      <div className="WordInputField">
+      <div className="sf-WordInputField">
         <form onSubmit={this.handleSubmit}>
           {giveHelp && (
-            <span className="WordInputField--letter-container">
+            <span className="sf-WordInputField--letterContainer">
               {letterEls}
             </span>
           )}
           <input type="text" value={value} onChange={this.handleChange} />
         </form>
         <style jsx>{`
-          .WordInputField {
+          .sf-WordInputField {
             display: inline-block;
             font-family: monospace;
           }
-          .WordInputField--letter-container {
+          .sf-WordInputField--letterContainer {
             position: absolute;
           }
           input {
@@ -57,7 +57,7 @@ export default class WordInputField extends React.Component {
           input:focus {
             outline: none;
           }
-          .WordInputField span {
+          .sf-WordInputField span {
             opacity: 0.5;
             pointer-events: none;
           }

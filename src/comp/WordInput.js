@@ -9,8 +9,8 @@ export default function WordInput({
 }) {
   const [front, end] = spanishPhrase.split('*');
   return (
-    <div className="WordInput">
-      <div className="article">
+    <div className="sf-WordInput">
+      <div className="sf-article">
         <span>{front}</span>
         <WordInputField
           spanishWord={spanishWord}
@@ -19,11 +19,11 @@ export default function WordInput({
         <span>{end}</span>
       </div>
       <style jsx>{`
-        .WordInput {
+        .sf-WordInput {
           display: inline-block;
           color: green;
         }
-        .article {
+        .sf-article {
           display: inline-block;
           margin-right: 5px;
         }
