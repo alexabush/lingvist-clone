@@ -2,53 +2,55 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { polar4 } from '../colors';
 
-export default function NavArrows({
+export default function SFNavArrows({
   onLeftClick,
   onRightClick,
   isPrev,
   children
 }) {
   return (
-    <div className="NavArrows">
+    <div className="SFNavArrows">
       <div
-        className="NavArrows--arrow-container arrow-left"
+        className="SFNavArrows--arrowContainer SFNavArrows--leftArrowContainer"
         onClick={onLeftClick}
       >
-        {isPrev ? null : <div className="arrow">L</div>}
+        {isPrev ? null : <div className="SFNavArrows--arrow">L</div>}
       </div>
       {children}
       <div
-        className="NavArrows--arrow-container arrow-right"
+        className="SFNavArrows--arrowContainer SFNavArrows--rightArrowContainer"
         onClick={onRightClick}
       >
-        <div className="arrow">R</div>
+        <div className="SFNavArrows--arrow">R</div>
       </div>
       <style jsx>{`
-        .NavArrows {
+        .SFNavArrows {
           display: flex;
         }
-        .NavArrows--arrow-container {
+        .SFNavArrows--arrowContainer {
           display: flex;
           justify-content: center;
           min-height: 100%;
           min-width: 20px;
         }
-        .NavArrows--arrow-container:hover {
+        .SFNavArrows--arrowContainer:hover {
           cursor: pointer;
         }
-        .NavArrows--arrow-container:active {
+        .SFNavArrows--arrowContainer:active {
           background: ${polar4};
         }
-        .NavArrows--arrow-container.arrow-left:hover .arrow {
+        .SFNavArrows--arrowContainer.SFNavArrows--leftArrowContainer:hover
+          .arrow {
           transform: translateX(-3px);
         }
-        .NavArrows--arrow-container.arrow-right:hover .arrow {
+        .SFNavArrows--arrowContainer.SFNavArrows--rightArrowContainer:hover
+          .arrow {
           transform: translateX(3px);
         }
-        .arrow {
+        .SFNavArrows--arrow {
           align-self: center;
         }
-        .NavArrows--arrow-container.arrow-left {
+        .SFNavArrows--arrowContainer.SFNavArrows--leftArrowContainer {
           visibility: ${isPrev ? 'hidden' : 'visible'};
         }
       `}</style>
@@ -56,7 +58,7 @@ export default function NavArrows({
   );
 }
 
-NavArrows.propTypes = {
+SFNavArrows.propTypes = {
   onLeftClick: PropTypes.func,
   onRightClick: PropTypes.func,
   isPrev: PropTypes.bool,

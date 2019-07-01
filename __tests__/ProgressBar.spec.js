@@ -7,7 +7,7 @@ describe('ProgressBar', () => {
     const wrap = mount(<ProgressBar num={15} />);
     expect(
       wrap
-        .find('div.progress-bar--num')
+        .find('.sf-ProgressBar--num')
         .first()
         .text()
     ).toBe('15');
@@ -16,7 +16,7 @@ describe('ProgressBar', () => {
     const wrap = mount(<ProgressBar num={5} />);
     expect(
       wrap
-        .find('div.progress-bar--num')
+        .find('.sf-ProgressBar--num')
         .first()
         .text()
     ).toBe('05');

@@ -10,7 +10,7 @@ export default function SFLanguageCardFooter({ wordDetails, description }) {
   };
   return (
     <div className="SFLanguageCardFooter">
-      <div className="SFLanguageCardFooter--wordData-container">
+      <div className="SFLanguageCardFooter--wordDataContainer">
         <SFTooltip display={wordDetails} direction="top" width={130}>
           P
         </SFTooltip>
@@ -19,9 +19,9 @@ export default function SFLanguageCardFooter({ wordDetails, description }) {
         </SFTooltip>
       </div>
 
-      <div className="SFLanguageCardFooter--LetterPicker-container">
+      <div className="SFLanguageCardFooter--LetterPickerContainer">
         <div
-          className="SFLanguageCardFooter--toggle-container"
+          className="SFLanguageCardFooter--toggleContainer"
           onClick={toggleShowAdditionalLetters}
         >
           En
@@ -47,7 +47,7 @@ export default function SFLanguageCardFooter({ wordDetails, description }) {
           justify-content: space-between;
           padding: 10px 15px;
         }
-        .SFLanguageCardFooter--wordData-container {
+        .SFLanguageCardFooter--wordDataContainer {
           display: flex;
         }
       `}</style>

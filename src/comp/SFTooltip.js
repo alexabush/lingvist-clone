@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { polar1, night4 } from '../colors';
 
+// TODO bug in multiline display
 export default function SFTooltip({
   display,
   direction = 'bottom',
@@ -9,17 +10,17 @@ export default function SFTooltip({
   children
 }) {
   return (
-    <div className={`SFTooltip-container SFTooltip-${direction}`}>
+    <div className={`SFTooltip--container SFTooltip--${direction}`}>
       <div className="SFTooltip" data-display={display} />
       {children}
       <style jsx>{`
-        .SFTooltip-container {
+        .SFTooltip--container {
           position: relative;
         }
-        .SFTooltip-container:hover .SFTooltip::before {
+        .SFTooltip--container:hover .SFTooltip::before {
           display: block;
         }
-        .SFTooltip-container:hover .SFTooltip::after {
+        .SFTooltip--container:hover .SFTooltip::after {
           display: block;
         }
         .SFTooltip::before {
@@ -40,11 +41,11 @@ export default function SFTooltip({
           position: absolute;
         }
 
-        .SFTooltip-top .SFTooltip::before {
+        .SFTooltip--top .SFTooltip::before {
           top: -40px;
           left: calc(-${width / 2}px);
         }
-        .SFTooltip-top .SFTooltip::after {
+        .SFTooltip--top .SFTooltip::after {
           border-width: 8px 6px 0px 6px;
           border-color: ${polar1} transparent transparent transparent;
           top: -12px;

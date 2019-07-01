@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import SFProgressCircles, {
-  SFProgressCircle
-} from '../src/comp/SFProgressCircles';
+import SFProgressCircles from '../src/comp/SFProgressCircles';
 
 describe('SFProgressCircles', () => {
   it('should render without throwing an error', function() {

@@ -4,21 +4,23 @@ import { frost2, polar4, green } from '../colors';
 
 export default function ProgressBar({ num }) {
   return (
-    <div className="progress-bar">
-      <div className="progress-bar--num">{num < 10 ? '0' + num : '' + num}</div>
-      <div className="progress-bar--bar">
-        <div className="progress-bar--bar---fill" />
+    <div className="sf-ProgressBar">
+      <div className="sf-ProgressBar--num">
+        {num < 10 ? '0' + num : '' + num}
       </div>
-      <div className="progress-bar--num">100</div>
+      <div className="sf-ProgressBar--bar">
+        <div className="sf-ProgressBar--bar---fill" />
+      </div>
+      <div className="sf-ProgressBar--num">100</div>
       <style jsx>{`
-        .progress-bar {
+        .sf-ProgressBar {
           display: flex;
         }
-        .progress-bar--num {
+        .sf-ProgressBar--num {
           padding: 0 5px;
           color: ${frost2};
         }
-        .progress-bar--bar {
+        .sf-ProgressBar--bar {
           position: relative;
           align-self: center;
           width: 500px;
@@ -26,7 +28,7 @@ export default function ProgressBar({ num }) {
           border-radius: 5px;
           background: ${polar4};
         }
-        .progress-bar--bar---fill {
+        .sf-ProgressBar--bar---fill {
           position: absolute;
           height: 10px;
           background: ${green};
