@@ -1,11 +1,11 @@
-import ExerciseCard from '../src/comp/ExerciseCard';
-import SFChiclet from '../src/comp/SFChiclet';
-import RepsScroller from '../src/comp/RepsScroller';
 import React from 'react';
-class ExampleChiclets extends React.PureComponent {
+import SFChiclet from './SFChiclet';
+
+export default class ChicletGroup extends React.PureComponent {
   state = {
     isSelected1: true,
-    isSelected2: false
+    isSelected2: false,
+    isSelected3: false
   };
 
   handleClick1 = () => {
@@ -40,23 +40,4 @@ class ExampleChiclets extends React.PureComponent {
       </div>
     );
   }
-}
-
-export default function DisplayAll() {
-  return (
-    <div>
-      <div style={{ margin: '30px' }}>
-        <h2>Example SFScroller</h2>
-        <RepsScroller />
-      </div>
-      <div style={{ margin: '30px' }}>
-        <h2>Example Chiclets</h2>
-        <ExampleChiclets />
-      </div>
-      <div style={{ margin: '30px' }}>
-        <h2>SFCard</h2>
-        <ExerciseCard />
-      </div>
-    </div>
-  );
 }
