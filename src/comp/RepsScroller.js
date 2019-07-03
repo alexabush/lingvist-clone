@@ -49,14 +49,12 @@ export default class RepsScroller extends React.PureComponent {
   render() {
     const { oneToTen, mod } = this.state;
     return (
-      <div style={{ width: '500px' }}>
-        <SFScroller
-          values={oneToTen}
-          modifiers={mod}
-          onChange={this.updateModifier}
-          onSlide={this.onSlideTester}
-        />
-      </div>
+      <SFScroller
+        values={oneToTen}
+        modifiers={mod}
+        onChange={this.updateModifier}
+        onSlide={this.onSlideTester}
+      />
     );
   }
 }

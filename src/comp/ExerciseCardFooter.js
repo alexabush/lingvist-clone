@@ -12,8 +12,6 @@ export default function ExerciseCardFooter({ exerciseWeight }) {
       <style jsx>{`
         .ExerciseCardFooter {
           display: flex;
-          max-width: 100%;
-          border: 1px solid green;
         }
         .ExerciseCardFooter--weightContainer {
           font-size: 2rem;
@@ -21,8 +19,7 @@ export default function ExerciseCardFooter({ exerciseWeight }) {
           justify-content: center;
           padding: 10px;
           width: 40px;
-          border: 1px solid purple;
-          //   overflow: hidden;
+          margin-left: 20px;
         }
       `}</style>
     </div>

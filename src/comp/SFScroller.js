@@ -28,7 +28,7 @@ export default class SFScroller extends React.PureComponent {
   handleScroll = () => {
     this.props.onSlide();
     const scroller = this.sfscroller.current;
-    const showGradientCoordinate = 45;
+    const showGradientCoordinate = 1;
     let newState = { ...this.state };
     if (scroller.scrollLeft > showGradientCoordinate) {
       newState.isFadeLeft = true;
@@ -79,11 +79,10 @@ export default class SFScroller extends React.PureComponent {
         <style jsx>{`
           .sf-scroller--container {
             position: relative;
+            overflow-x: auto;
           }
           .sf-scroller {
-            border: 1px solid red;
             display: flex;
-            // max-width: 80%;
             overflow-x: auto;
           }
           ::-webkit-scrollbar {
