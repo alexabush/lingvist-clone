@@ -45,8 +45,7 @@ export default class App extends React.Component {
         currentIndex: this.state.currentIndex + 1
       });
     } else {
-      console.log('need to make change');
-      return;
+      // TODO should trigger form submission
     }
   };
   handleSuccess = () => {
@@ -71,6 +70,7 @@ export default class App extends React.Component {
               card={words[currentIndex]}
               toggleModal={this.toggleModal}
               handleSuccess={this.handleSuccess}
+              isCorrect={isPrev}
             />
           </SFNavArrows>
           <div className="english-word">
