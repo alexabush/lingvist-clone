@@ -20,6 +20,7 @@ export default function WordInput({
       </div>
       <style jsx>{`
         .sf-WordInput {
+          font-size: 1.5rem;
           display: inline-block;
           color: green;
         }

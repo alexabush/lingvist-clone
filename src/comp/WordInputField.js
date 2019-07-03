@@ -30,6 +30,7 @@ export default class WordInputField extends React.Component {
   render() {
     const { value, giveHelp } = this.state;
     const { spanishWord = '' } = this.props;
+    console.log(spanishWord.length);
     const letterEls = this.generateLetters(spanishWord);
     return (
       <div className="sf-WordInputField">
@@ -39,7 +40,12 @@ export default class WordInputField extends React.Component {
               {letterEls}
             </span>
           )}
-          <input type="text" value={value} onChange={this.handleChange} />
+          <input
+            className="sf-WordInputField--input"
+            type="text"
+            value={value}
+            onChange={this.handleChange}
+          />
         </form>
         <style jsx>{`
           .sf-WordInputField {
@@ -49,12 +55,18 @@ export default class WordInputField extends React.Component {
           .sf-WordInputField--letterContainer {
             position: absolute;
           }
-          input {
+          .sf-WordInputField--input {
+            font-family: monospace;
+            font-size: 1.5rem;
+            color: green;
+            padding: 5px;
+            outline: none;
             border: none;
             background: ${polar2};
-            width: calc(${spanishWord.length} * 0.5rem);
+            box-sizing: border-box;
+            width: calc(${spanishWord.length} * 1rem + 5px);
           }
-          input:focus {
+          sf-WordInputField--input:focus {
             outline: none;
           }
           .sf-WordInputField span {
