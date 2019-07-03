@@ -3,15 +3,10 @@ import PropTypes from 'prop-types';
 import { polar1, night4 } from '../colors';
 
 // TODO bug in multiline display
-export default function SFTooltip({
-  display,
-  direction = 'bottom',
-  width = 100,
-  children
-}) {
+export default function SFTooltip({ display, direction = 'bottom', children }) {
   return (
-    <div className={`SFTooltip--container SFTooltip--${direction}`}>
-      <div className="SFTooltip" data-display={display} />
+    <span className={`SFTooltip--container SFTooltip--${direction}`}>
+      <span className="SFTooltip" data-display={display} />
       {children}
       <style jsx>{`
         .SFTooltip--container {
@@ -25,14 +20,15 @@ export default function SFTooltip({
         }
         .SFTooltip::before {
           display: none;
-          width: ${width}px;
+          font-size: 0.5rem;
           content: attr(data-display);
           background: ${polar1};
           color: ${night4};
-          padding: 5px 20px;
+          padding: 5px 15px;
           border-radius: 3px;
-          position: absolute;
           box-shadow: 3px 3px 5px -3px ${night4};
+          position: absolute;
+          white-space: nowrap;
         }
         .SFTooltip::after {
           display: none;
@@ -42,17 +38,18 @@ export default function SFTooltip({
         }
 
         .SFTooltip--top .SFTooltip::before {
-          top: -40px;
-          left: calc(-${width / 2}px);
+          left: 50%;
+          transform: translate(-50%, -150%);
         }
         .SFTooltip--top .SFTooltip::after {
-          border-width: 8px 6px 0px 6px;
+          border-width: 7px 7px 0px 7px;
           border-color: ${polar1} transparent transparent transparent;
           top: -12px;
-          left: calc(-50%);
+          transform: translateX(-50%);
+          left: 50%;
         }
       `}</style>
-    </div>
+    </span>
   );
 }
 

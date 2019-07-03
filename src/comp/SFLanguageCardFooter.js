@@ -11,10 +11,10 @@ export default function SFLanguageCardFooter({ wordDetails, description }) {
   return (
     <div className="SFLanguageCardFooter">
       <div className="SFLanguageCardFooter--wordDataContainer">
-        <SFTooltip display={wordDetails} direction="top" width={130}>
+        <SFTooltip display={wordDetails} direction="top">
           P
         </SFTooltip>
-        <SFTooltip display="Noun" direction="top" width={40}>
+        <SFTooltip display="Noun" direction="top">
           {description}
         </SFTooltip>
       </div>
