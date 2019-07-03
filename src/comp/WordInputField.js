@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { polar2 } from '../colors';
 
 export default class WordInputField extends React.Component {
-  state = { value: '', giveHelp: false };
+  state = { value: '', prevAttempt: {}, giveHelp: false };
   handleChange = e => {
     this.setState({ value: e.target.value });
   };
@@ -12,11 +12,37 @@ export default class WordInputField extends React.Component {
     const { value } = this.state;
     e.preventDefault();
     if (value !== spanishWord) {
-      this.setState({ value: '', giveHelp: true });
+      const correctLetters = this.compareAttemptWithCorrectWord(
+        spanishWord,
+        value
+      );
+      this.setState({ value: '', prevAttempt: correctLetters, giveHelp: true });
     } else {
+      this.setState({ value: '', prevAttempt: {} });
       handleSuccess();
     }
   };
+  compareAttemptWithCorrectWord = (correctWord, attempt) => {
+    correctWord = correctWord.split('');
+    const correctLetters = {};
+    const freq = {};
+    for (let i = 0; i < correctWord.length; i++) {
+      if (freq[correctWord[i]]) {
+        freq[correctWord[i]].push(i);
+      } else {
+        freq[correctWord[i]] = [i];
+      }
+    }
+    for (let i = 0; i < attempt.length; i++) {
+      const letter = attempt[i];
+      if (freq[letter]) {
+        const correctIdx = freq[letter].shift();
+        correctLetters[correctIdx] = letter;
+      }
+    }
+    return correctLetters;
+  };
+
   generateLetters = spanishWord => {
     return spanishWord.split('').map((letter, i) => {
       return (
@@ -28,16 +54,14 @@ export default class WordInputField extends React.Component {
   };
 
   render() {
-    const { value, giveHelp } = this.state;
+    const { value, prevAttempt, giveHelp } = this.state;
     const { spanishWord = '' } = this.props;
-    console.log(spanishWord.length);
-    const letterEls = this.generateLetters(spanishWord);
     return (
       <div className="sf-WordInputField">
         <form onSubmit={this.handleSubmit}>
           {giveHelp && (
             <span className="sf-WordInputField--letterContainer">
-              {letterEls}
+              {this.generateLetters(spanishWord)}
             </span>
           )}
           <input
@@ -52,14 +76,18 @@ export default class WordInputField extends React.Component {
             display: inline-block;
             font-family: monospace;
           }
-          .sf-WordInputField--letterContainer {
-            position: absolute;
-          }
+          .sf-WordInputField--letterContainer,
           .sf-WordInputField--input {
             font-family: monospace;
             font-size: 1.5rem;
-            color: green;
             padding: 5px;
+          }
+          .sf-WordInputField--letterContainer {
+            position: absolute;
+            color: red;
+          }
+          .sf-WordInputField--input {
+            color: green;
             outline: none;
             border: none;
             background: ${polar2};
