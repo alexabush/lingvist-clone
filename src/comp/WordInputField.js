@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { polar2 } from '../colors';
+import HintLetter from './HintLetter';
 
 export default class WordInputField extends React.Component {
   state = { value: '', prevAttempt: {}, giveHelp: false };
@@ -43,12 +44,10 @@ export default class WordInputField extends React.Component {
     return correctLetters;
   };
 
-  generateLetters = spanishWord => {
+  generateLetters = (spanishWord, prevAttempt) => {
     return spanishWord.split('').map((letter, i) => {
       return (
-        <span key={i} className="sf-spans">
-          {letter}
-        </span>
+        <HintLetter key={i} letter={letter} isCorrect={!!prevAttempt[i]} />
       );
     });
   };
@@ -61,7 +60,7 @@ export default class WordInputField extends React.Component {
         <form onSubmit={this.handleSubmit}>
           {giveHelp && (
             <span className="sf-WordInputField--letterContainer">
-              {this.generateLetters(spanishWord)}
+              {this.generateLetters(spanishWord, prevAttempt)}
             </span>
           )}
           <input
@@ -84,7 +83,6 @@ export default class WordInputField extends React.Component {
           }
           .sf-WordInputField--letterContainer {
             position: absolute;
-            color: red;
           }
           .sf-WordInputField--input {
             color: green;
