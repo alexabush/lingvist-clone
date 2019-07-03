@@ -5,17 +5,22 @@ import WordInputField from './WordInputField';
 export default function WordInput({
   spanishWord = '',
   spanishPhrase = '',
-  handleSuccess
+  handleSuccess,
+  isCorrect
 }) {
   const [front, end] = spanishPhrase.split('*');
   return (
     <div className="sf-WordInput">
-      <div className="sf-article">
+      <div className="sf-WordInput--article">
         <span>{front}</span>
-        <WordInputField
-          spanishWord={spanishWord}
-          handleSuccess={handleSuccess}
-        />
+        {isCorrect ? (
+          <span className="sf-WordInput--correctWord">{spanishWord}</span>
+        ) : (
+          <WordInputField
+            spanishWord={spanishWord}
+            handleSuccess={handleSuccess}
+          />
+        )}
         <span>{end}</span>
       </div>
       <style jsx>{`
@@ -24,7 +29,12 @@ export default function WordInput({
           display: inline-block;
           color: green;
         }
-        .sf-article {
+        .sf-WordInput--correctWord {
+          color: lightgreen;
+          border-bottom-width: 2px;
+          border-bottom-style: solid;
+        }
+        .sf-WordInput--article {
           display: inline-block;
           margin-right: 5px;
         }
@@ -36,5 +46,6 @@ export default function WordInput({
 WordInput.propTypes = {
   spanishWord: PropTypes.string,
   spanishPhrase: PropTypes.string,
-  handleSuccess: PropTypes.func
+  handleSuccess: PropTypes.func,
+  isCorrect: PropTypes.bool
 };

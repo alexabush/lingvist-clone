@@ -15,7 +15,8 @@ export default function SFLanguageCard({
     wordDetails,
     partOfSpeech
   },
-  handleSuccess
+  handleSuccess,
+  isCorrect
 }) {
   return (
     <div className="SFLanguageCard">
@@ -28,6 +29,7 @@ export default function SFLanguageCard({
         spanishPhrase={spanishPhrase}
         englishWord={englishWord}
         handleSuccess={handleSuccess}
+        isCorrect={isCorrect}
       />
       <SFLanguageCardFooter
         wordDetails={wordDetails}
@@ -63,5 +65,6 @@ SFLanguageCard.propTypes = {
     wordDetails: PropTypes.string,
     partOfSpeech: PropTypes.string
   }),
-  handleSuccess: PropTypes.func
+  handleSuccess: PropTypes.func,
+  isCorrect: PropTypes.bool
 };
