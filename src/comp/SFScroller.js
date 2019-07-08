@@ -7,7 +7,7 @@ export default class SFScroller extends R.PureComponent {
     values: T.array,
     modifiers: T.object,
     onChange: T.func,
-    onSlide: T.func,
+    onSlide: T.func
   };
 
   constructor(props) {
@@ -17,7 +17,7 @@ export default class SFScroller extends R.PureComponent {
 
   state = {
     isFadeLeft: false,
-    isFadeRight: false,
+    isFadeRight: false
   };
 
   componentDidMount() {
@@ -25,16 +25,20 @@ export default class SFScroller extends R.PureComponent {
   }
 
   handleScroll = () => {
-    this.props.onSlide();
+    const { onSlide } = this.props;
+    onSlide();
     const scroller = this.sfscroller.current;
-    const showGradientCoordinate = 45;
+    const showGradientCoordinate = 1;
     let newState = { ...this.state };
     if (scroller.scrollLeft > showGradientCoordinate) {
       newState.isFadeLeft = true;
     } else {
       newState.isFadeLeft = false;
     }
-    if (scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - showGradientCoordinate) {
+    if (
+      scroller.scrollLeft + scroller.clientWidth <
+      scroller.scrollWidth - showGradientCoordinate
+    ) {
       newState.isFadeRight = true;
     } else {
       newState.isFadeRight = false;
@@ -51,7 +55,12 @@ export default class SFScroller extends R.PureComponent {
     return values.map(num => {
       const modifierComponent = modifiers[num] ? modifiers[num] : null;
       return (
-        <SFScrollerNumber key={num} number={num} modifier={modifierComponent} handleClick={this.handleNumberClick} />
+        <SFScrollerNumber
+          key={num}
+          number={num}
+          modifier={modifierComponent}
+          handleClick={this.handleNumberClick}
+        />
       );
     });
   };

@@ -5,7 +5,7 @@ import R from 'react';
 class ExampleChiclets extends R.PureComponent {
   state = {
     isSelected1: true,
-    isSelected2: false,
+    isSelected2: false
   };
 
   handleClick1 = () => {
@@ -22,10 +22,16 @@ class ExampleChiclets extends R.PureComponent {
   render() {
     return (
       <div>
-        <SFChiclet onClick={this.handleClick1} selected={this.state.isSelected1}>
+        <SFChiclet
+          onClick={this.handleClick1}
+          selected={this.state.isSelected1}
+        >
           10
         </SFChiclet>
-        <SFChiclet onClick={this.handleClick2} selected={this.state.isSelected2}>
+        <SFChiclet
+          onClick={this.handleClick2}
+          selected={this.state.isSelected2}
+        >
           9
         </SFChiclet>
         <SFChiclet onClick={this.handleClick} outline>
@@ -40,11 +46,24 @@ class ExampleScroller extends R.PureComponent {
   state = {
     oneToTen: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     mod: {
-      '8': <div style={{ width: 8, height: 8, borderRadius: 4, border: '1px dotted black' }} />,
-      '10': <div style={{ width: 6, height: 6, borderRadius: 3, background: 'black' }} />,
-    },
+      '8': (
+        <div
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: 4,
+            border: '1px dotted black'
+          }}
+        />
+      ),
+      '10': (
+        <div
+          style={{ width: 6, height: 6, borderRadius: 3, background: 'black' }}
+        />
+      )
+    }
   };
-  onSlideTester = () => {
+  onScrollTester = () => {
     console.log('on slide');
   };
 
@@ -55,7 +74,11 @@ class ExampleScroller extends R.PureComponent {
         acc[key] = state.mod[key];
         return acc;
       }, {});
-      newMod[num] = <div style={{ width: 6, height: 6, borderRadius: 3, background: 'black' }} />;
+      newMod[num] = (
+        <div
+          style={{ width: 6, height: 6, borderRadius: 3, background: 'black' }}
+        />
+      );
       return { mod: newMod };
     });
   };
@@ -64,7 +87,12 @@ class ExampleScroller extends R.PureComponent {
     const { oneToTen, mod } = this.state;
     return (
       <div style={{ width: '500px' }}>
-        <SFScroller values={oneToTen} modifiers={mod} onChange={this.updateModifier} onSlide={this.onSlideTester} />
+        <SFScroller
+          values={oneToTen}
+          modifiers={mod}
+          onChange={this.updateModifier}
+          onScroll={this.onScrollTester}
+        />
       </div>
     );
   }
@@ -95,7 +123,7 @@ class ExerciseCard extends R.PureComponent {
   toggleExpand = () => {
     this.setState(state => {
       return {
-        isExpanded: !state.isExpanded,
+        isExpanded: !state.isExpanded
       };
     });
   };
@@ -116,7 +144,14 @@ class ExerciseCard extends R.PureComponent {
 
 function WorkoutData() {
   return (
-    <div style={{ display: 'flex', 'flex-direction': 'column', 'justify-content': 'center', 'align-items': 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        'flex-direction': 'column',
+        'justify-content': 'center',
+        'align-items': 'center'
+      }}
+    >
       <p>Extra Information Goes Here</p>
       <p>Equipment Selection w/Weight Calculator</p>
       <p>Variation Selection</p>
