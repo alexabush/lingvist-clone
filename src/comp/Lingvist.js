@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 import { rellow } from '../colors';
 import SFModal from './SFModal';
 import SFNavArrows from './SFNavArrows';
@@ -98,3 +99,14 @@ export default class Lingvist extends React.Component {
     );
   }
 }
+
+Lingvist.T = {
+  spanishWord: T.string,
+  spanishPhrase: T.string,
+  englishPhrase: T.string,
+  englishWord: T.arrayOf(T.string),
+  wordStrength: T.number,
+  wordDetails: T.string,
+  partOfSpeech: T.string,
+  currentIndex: T.number
+};
