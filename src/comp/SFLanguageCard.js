@@ -6,15 +6,13 @@ import SFLanguageCardFooter from './SFLanguageCardFooter';
 import { polar1 } from '../colors';
 
 export default function SFLanguageCard({
-  card: {
-    spanishWord,
-    spanishPhrase,
-    englishPhrase,
-    englishWord,
-    wordStrength,
-    wordDetails,
-    partOfSpeech
-  },
+  spanishWord,
+  spanishPhrase,
+  englishPhrase,
+  englishWord,
+  wordStrength,
+  wordDetails,
+  partOfSpeech,
   handleSuccess,
   isCorrect
 }) {
@@ -56,15 +54,13 @@ export default function SFLanguageCard({
 }
 
 SFLanguageCard.propTypes = {
-  card: PropTypes.shape({
-    spanishWord: PropTypes.string,
-    spanishPhrase: PropTypes.string,
-    englishPhrase: PropTypes.string,
-    englishWord: PropTypes.arrayOf(PropTypes.string),
-    wordStrength: PropTypes.number,
-    wordDetails: PropTypes.string,
-    partOfSpeech: PropTypes.string
-  }),
+  spanishWord: PropTypes.string,
+  spanishPhrase: PropTypes.string,
+  englishPhrase: PropTypes.string,
+  englishWord: PropTypes.arrayOf(PropTypes.string),
+  wordStrength: PropTypes.number,
+  wordDetails: PropTypes.string,
+  partOfSpeech: PropTypes.string,
   handleSuccess: PropTypes.func,
   isCorrect: PropTypes.bool
 };
