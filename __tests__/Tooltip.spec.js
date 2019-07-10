@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import SFTooltip from '../src/comp/SFTooltip';
+import Tooltip from '../src/comp/Tooltip';
 
-describe('SFTooltip', () => {
+describe('Tooltip', () => {
   it('should render children', function() {
     const wrap = mount(
-      <SFTooltip>
+      <Tooltip>
         <div className="tester">sample text</div>
-      </SFTooltip>
+      </Tooltip>
     );
     expect(wrap.find('.tester').text()).toEqual('sample text');
   });

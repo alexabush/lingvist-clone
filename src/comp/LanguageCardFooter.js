@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import SFTooltip from './SFTooltip';
-import SFLetterPicker from './SFLetterPicker';
+import Tooltip from './Tooltip';
+import LetterPicker from './LetterPicker';
 
-export default function SFLanguageCardFooter({ wordDetails, description }) {
+export default function LanguageCardFooter({ wordDetails, description }) {
   const [showAdditionalLetters, setShowAdditionalLetters] = useState(false);
   const toggleShowAdditionalLetters = () => {
     setShowAdditionalLetters(!showAdditionalLetters);
   };
   return (
-    <div className="SFLanguageCardFooter">
-      <div className="SFLanguageCardFooter--wordDataContainer">
-        <SFTooltip display={wordDetails} direction="top">
+    <div className="language-card-footer">
+      <div className="language-card-footer--word-data-container">
+        <Tooltip display={wordDetails} direction="top">
           P
-        </SFTooltip>
-        <SFTooltip display="Noun" direction="top">
+        </Tooltip>
+        <Tooltip display="Noun" direction="top">
           {description}
-        </SFTooltip>
+        </Tooltip>
       </div>
 
-      <div className="SFLanguageCardFooter--LetterPickerContainer">
+      <div className="language-card-footer--letter-picker-container">
         <div
-          className="SFLanguageCardFooter--toggleContainer"
+          className="language-card-footer--toggle-container"
           onClick={toggleShowAdditionalLetters}
         >
           En
         </div>
         {showAdditionalLetters && (
-          <SFLetterPicker
+          <LetterPicker
             letters={[
               { letter: 'a', num: 1 },
               { letter: 'e', num: 2 },
@@ -42,12 +42,12 @@ export default function SFLanguageCardFooter({ wordDetails, description }) {
       </div>
 
       <style jsx>{`
-        .SFLanguageCardFooter {
+        .language-card-footer {
           display: flex;
           justify-content: space-between;
           padding: 10px 15px;
         }
-        .SFLanguageCardFooter--wordDataContainer {
+        .language-card-footer--word-data-container {
           display: flex;
         }
       `}</style>
@@ -55,7 +55,7 @@ export default function SFLanguageCardFooter({ wordDetails, description }) {
   );
 }
 
-SFLanguageCardFooter.propTypes = {
+LanguageCardFooter.propTypes = {
   wordDetails: PropTypes.string,
   description: PropTypes.string
 };

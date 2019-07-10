@@ -1,10 +1,10 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 import { rellow } from '../colors';
-import SFModal from './SFModal';
-import SFNavArrows from './SFNavArrows';
+import Modal from './Modal';
+import NavArrows from './NavArrows';
 import LevelsInfo from './LevelsInfo';
-import SFLanguageCard from './SFLanguageCard';
+import LanguageCard from './LanguageCard';
 import ProgressBar from './ProgressBar';
 
 export default class Lingvist extends React.Component {
@@ -17,54 +17,57 @@ export default class Lingvist extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
   handleLeftClick = () => {
-    if (this.state.currentIndex < 1) return;
+    const { currentIndex, updateIndex } = this.props;
+    if (this.props.currentIndex < 1) return;
     if (this.state.isPrev) return;
-    this.setState({ isPrev: true, currentIndex: this.state.currentIndex - 1 });
+    this.setState({ isPrev: true });
+    updateIndex(currentIndex - 1);
   };
   handleRightClick = () => {
-    if (this.state.currentIndex >= this.state.words.length - 1) return;
+    const { currentIndex, updateIndex } = this.props;
     if (this.state.isPrev) {
       this.setState({
-        isPrev: false,
-        currentIndex: this.state.currentIndex + 1
+        isPrev: false
       });
+      updateIndex(currentIndex + 1);
     } else {
       // TODO should trigger form submission
     }
   };
   handleSuccess = () => {
-    this.setState({ currentIndex: this.state.currentIndex + 1 });
+    const { currentIndex, updateIndex } = this.props;
+    updateIndex(currentIndex + 1);
   };
   render() {
     const { showModal, isPrev } = this.state;
     const {
-      spanishWord,
-      spanishPhrase,
-      englishPhrase,
-      englishWord,
+      foreignWord,
+      foreignPhrase,
+      nativePhrase,
+      nativeWord,
       wordStrength,
       wordDetails,
       partOfSpeech,
       currentIndex
     } = this.props;
     return showModal ? (
-      <SFModal>
+      <Modal>
         <LevelsInfo toggleModal={this.toggleModal} />
-      </SFModal>
+      </Modal>
     ) : (
-      <div className="Lingvist">
+      <div className="lingvist">
         <div />
-        <div className="Lingvist--container">
-          <SFNavArrows
+        <div className="lingvist--container">
+          <NavArrows
             isPrev={isPrev}
             onLeftClick={this.handleLeftClick}
             onRightClick={this.handleRightClick}
           >
-            <SFLanguageCard
-              spanishWord={spanishWord}
-              spanishPhrase={spanishPhrase}
-              englishPhrase={englishPhrase}
-              englishWord={englishWord}
+            <LanguageCard
+              foreignWord={foreignWord}
+              foreignPhrase={foreignPhrase}
+              nativePhrase={nativePhrase}
+              nativeWord={nativeWord}
               wordStrength={wordStrength}
               wordDetails={wordDetails}
               partOfSpeech={partOfSpeech}
@@ -72,15 +75,15 @@ export default class Lingvist extends React.Component {
               handleSuccess={this.handleSuccess}
               isCorrect={isPrev}
             />
-          </SFNavArrows>
-          <div className="english-word">
-            {englishWord && englishWord.join(', ')}
+          </NavArrows>
+          <div className="native-word">
+            {nativeWord && nativeWord.join(', ')}
           </div>
         </div>
         <ProgressBar num={currentIndex + 1} />
 
         <style jsx>{`
-          .Lingvist {
+          .lingvist {
             min-height: 100vh;
             background: ${rellow};
             padding: 15px;
@@ -89,7 +92,7 @@ export default class Lingvist extends React.Component {
             justify-content: space-between;
             align-items: center;
           }
-          .english-word {
+          .native-word {
             position: relative;
             top: 30px;
             left: 40px;
@@ -100,13 +103,15 @@ export default class Lingvist extends React.Component {
   }
 }
 
-Lingvist.T = {
-  spanishWord: T.string,
-  spanishPhrase: T.string,
-  englishPhrase: T.string,
-  englishWord: T.arrayOf(T.string),
-  wordStrength: T.number,
-  wordDetails: T.string,
-  partOfSpeech: T.string,
-  currentIndex: T.number
+Lingvist.propTypes = {
+  foreignWord: PropTypes.string,
+  foreignPhrase: PropTypes.string,
+  nativePhrase: PropTypes.string,
+  nativeWord: PropTypes.arrayOf(PropTypes.string),
+  wordStrength: PropTypes.number,
+  wordDetails: PropTypes.string,
+  partOfSpeech: PropTypes.string,
+  currentIndex: PropTypes.number,
+  updateIndex: PropTypes.func,
+  updateWordStrength: PropTypes.func
 };

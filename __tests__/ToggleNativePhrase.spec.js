@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import ToggleEnglishPhrase from '../src/comp/ToggleEnglishPhrase';
+import ToggleNativePhrase from '../src/comp/ToggleNativePhrase';
 
-describe('ToggleEnglishPhrase', () => {
+describe('ToggleNativePhrase', () => {
   it('calls toggleShow when clicked ', function() {
     const mockToggle = jest.fn();
-    const wrap = mount(<ToggleEnglishPhrase toggleShow={mockToggle} />);
-    const clickComp = wrap.find('.sf-ToggleEnglishPhrase');
+    const wrap = mount(<ToggleNativePhrase toggleShow={mockToggle} />);
+    const clickComp = wrap.find('.toggle-native-phrase');
     expect(mockToggle.mock.calls.length).toBe(0);
     clickComp.simulate('click');
     expect(mockToggle.mock.calls.length).toBe(1);

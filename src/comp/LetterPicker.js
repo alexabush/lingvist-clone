@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { frost3, frost4 } from '../colors';
 
-export default function SFLetterPicker({ letters }) {
+export default function LetterPicker({ letters }) {
   return (
-    <div className="SFLetterPicker">
+    <div className="letter-picker">
       {letters.map(({ letter, num }, i) => {
         return <AdditionalLetter key={i} letter={letter} num={num} />;
       })}
       <style jsx>{`
-        .SFLetterPicker {
+        .letter-picker {
           display: flex;
           justify-content: space-between;
           width: 560px;
@@ -23,7 +23,7 @@ export default function SFLetterPicker({ letters }) {
           top: calc(100% + 25px);
           z-index: 1;
         }
-        .SFLetterPicker::after {
+        .letter-picker::after {
           content: '';
           border-style: solid;
           border-width: 0px 14px 16px 14px;
@@ -37,7 +37,7 @@ export default function SFLetterPicker({ letters }) {
   );
 }
 
-SFLetterPicker.propTypes = {
+LetterPicker.propTypes = {
   letters: PropTypes.arrayOf(
     PropTypes.shape({
       letter: PropTypes.string,
@@ -48,9 +48,9 @@ SFLetterPicker.propTypes = {
 
 export function AdditionalLetter({ letter, num }) {
   return (
-    <div className="AdditionalLetter">
-      <div className="AdditionalLetter--letter">{letter}</div>
-      <div className="AdditionalLetter--number">{num}</div>
+    <div className="additional-letter">
+      <div className="additional-letter--letter">{letter}</div>
+      <div className="additional-letter--number">{num}</div>
       <style jsx>{`
         display: flex;
         flex-direction: column;
@@ -59,18 +59,18 @@ export function AdditionalLetter({ letter, num }) {
         color: white;
         border-radius: 5px;
 
-        .AdditionalLetter {
+        .additional-letter {
           padding: 5px 15px;
           align-self: center;
         }
-        .AdditionalLetter:hover {
+        .additional-letter:hover {
           background: ${frost3};
         }
-        .AdditionalLetter--letter {
+        .additional-letter--letter {
           font-size: 1.25rem;
           margin-bottom: 10px;
         }
-        .AdditionalLetter--number {
+        .additional-letter--number {
           font-size: 0.5rem;
         }
       `}</style>

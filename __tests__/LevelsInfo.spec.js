@@ -15,6 +15,6 @@ describe('LevelsInfo', () => {
 describe('RepetitionInfoLevel', () => {
   it('should render text prop', function() {
     const wrap = mount(<RepetitionInfoLevel text={'Tester Text'} />);
-    expect(wrap.find('div.infoText').text()).toBe('Tester Text');
+    expect(wrap.find('div.info-text').text()).toBe('Tester Text');
   });
 });

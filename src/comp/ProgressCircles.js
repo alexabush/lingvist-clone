@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function SFProgressCircles({ wordStrength }) {
+export default function ProgressCircles({ wordStrength }) {
   const colors = ['orange', 'purple', 'red', 'turquoise', 'green'];
 
   function makeDots() {
@@ -9,18 +9,18 @@ export default function SFProgressCircles({ wordStrength }) {
     let color = colors[wordStrength - 1];
     for (let i = 0; i < 5; i++) {
       if (i < wordStrength) {
-        dots.push(<SFProgressCircle key={i} color={color} isFilled />);
+        dots.push(<ProgressCircle key={i} color={color} isFilled />);
       } else {
-        dots.push(<SFProgressCircle key={i} />);
+        dots.push(<ProgressCircle key={i} />);
       }
     }
     return dots;
   }
   return (
-    <div className="SFProgressCircles">
+    <div className="sf-progress-circles">
       {makeDots()}
       <style jsx>{`
-        .SFProgressCircles {
+        .sf-progress-circles {
           display: flex;
           align-items: center;
         }
@@ -29,15 +29,15 @@ export default function SFProgressCircles({ wordStrength }) {
   );
 }
 
-SFProgressCircles.propTypes = {
+ProgressCircles.propTypes = {
   wordStrength: PropTypes.number
 };
 
-export function SFProgressCircle({ color, isFilled }) {
+export function ProgressCircle({ color, isFilled }) {
   return (
-    <div className="SFProgressCircle">
+    <div className="sf-progress-circle">
       <style jsx>{`
-        .SFProgressCircle {
+        .sf-progress-circle {
           height: 9px;
           width: 9px;
           background: ${isFilled && color ? color : 'lightgrey'};
@@ -49,7 +49,7 @@ export function SFProgressCircle({ color, isFilled }) {
   );
 }
 
-SFProgressCircle.propTypes = {
+ProgressCircle.propTypes = {
   color: PropTypes.string,
   isFilled: PropTypes.bool
 };

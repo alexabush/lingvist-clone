@@ -1,44 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SFProgressCircles from './SFProgressCircles';
+import ProgressCircles from './ProgressCircles';
 import { polar2 } from '../colors';
 
-export default function SFProgressInfo({ wordStrength }) {
+export default function ProgressInfo({ wordStrength }) {
   return (
-    <div className="SFProgressInfo--container">
-      <div className="SFProgressInfo--ProgressCirclesContainer">
-        <SFProgressCircles wordStrength={wordStrength} />
+    <div className="progress-info--container">
+      <div className="progress-info--progress-circles-container">
+        <ProgressCircles wordStrength={wordStrength} />
       </div>
-      <div className="SFProgressInfo--textContainer">
+      <div className="progress-info--text-container">
         {wordStrength === 1 && 'New Word '}
-        <span className="SFProgressInfo--text">
+        <span className="progress-info--text">
           {wordStrength !== 1 && 'This word needs more practice. '}
           Find out more
         </span>
       </div>
       <style jsx>{`
-        .SFProgressInfo--container {
+        .progress-info--container {
           display: flex;
           align-items: center;
           border-radius: 5px;
         }
-        .SFProgressInfo--container:hover {
+        .progress-info--container:hover {
           cursor: pointer;
           background: ${polar2};
           transition: background 300ms, opacity 300ms;
         }
-        .SFProgressInfo--container:hover .SFProgressInfo--text {
+        .progress-info--container:hover .progress-info--text {
           opacity: 1;
         }
-        .SFProgressInfo--textContainer {
+        .progress-info--text-container {
           font-size: 0.8rem;
           padding-left: 10px;
           padding-right: 3px;
         }
-        .SFProgressInfo--text {
+        .progress-info--text {
           opacity: 0;
         }
-        .SFProgressInfo--textContainer span {
+        .progress-info--text-container span {
           font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
       `}</style>
@@ -46,6 +46,6 @@ export default function SFProgressInfo({ wordStrength }) {
   );
 }
 
-SFProgressInfo.propTypes = {
+ProgressInfo.propTypes = {
   wordStrength: PropTypes.number
 };

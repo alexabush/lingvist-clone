@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import SFLanguageCardFooter from '../src/comp/SFLanguageCardFooter';
+import LanguageCardFooter from '../src/comp/LanguageCardFooter';
 
-describe('SFLanguageCardFooter', () => {
+describe('LanguageCardFooter', () => {
   it('toggles show on click', function() {
-    const wrap = mount(<SFLanguageCardFooter />);
-    let container = wrap.find('.SFLanguageCardFooter--LetterPickerContainer');
-    let toggleElement = wrap.find('.SFLanguageCardFooter--toggleContainer');
+    const wrap = mount(<LanguageCardFooter />);
+    let container = wrap.find('.language-card-footer--letter-picker-container');
+    let toggleElement = wrap.find('.language-card-footer--toggle-container');
     expect(container.children().length).toBe(1);
     toggleElement.simulate('click');
     let firstClickContainer = wrap.find(
-      '.SFLanguageCardFooter--LetterPickerContainer'
+      '.language-card-footer--letter-picker-container'
     );
     expect(firstClickContainer.children().length).toBe(2);
     toggleElement.simulate('click');
     let secondClickContainer = wrap.find(
-      '.SFLanguageCardFooter--LetterPickerContainer'
+      '.language-card-footer--letter-picker-container'
     );
 
     expect(secondClickContainer.children().length).toBe(1);

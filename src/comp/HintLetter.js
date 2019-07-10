@@ -1,19 +1,19 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 
 export default function HintLetter({ letter, isCorrect }) {
   return (
     <span
-      className={`sf-HintLetter ${
-        isCorrect ? 'sf-HintLetter--correct' : 'sf-HintLetter--incorrect'
+      className={`hint-letter ${
+        isCorrect ? 'hint-letter--correct' : 'hint-letter--incorrect'
       }`}
     >
       {letter}
       <style jsx>{`
-        .sf-HintLetter--correct {
+        .hint-letter--correct {
           color: green;
         }
-        .sf-HintLetter--incorrect {
+        .hint-letter--incorrect {
           color: red;
         }
       `}</style>
@@ -21,7 +21,7 @@ export default function HintLetter({ letter, isCorrect }) {
   );
 }
 
-HintLetter.T = {
-  letter: T.string,
-  isCorrect: T.bool
+HintLetter.propTypes = {
+  letter: PropTypes.string,
+  isCorrect: PropTypes.bool
 };

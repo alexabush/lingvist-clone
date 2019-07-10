@@ -1,9 +1,9 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 
-export default class SFCard extends React.PureComponent {
+export default class Card extends React.PureComponent {
   static propTypes = {
-    children: T.any
+    children: PropTypes.any
   };
 
   render() {

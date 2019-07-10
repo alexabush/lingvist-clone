@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { polar2 } from '../colors';
 import HintLetter from './HintLetter';
+import { compareAttemptWithCorrectWord } from '../../lib';
 
 export default class WordInputField extends React.Component {
   state = { value: '', prevAttempt: {}, giveHelp: false };
@@ -9,43 +10,20 @@ export default class WordInputField extends React.Component {
     this.setState({ value: e.target.value });
   };
   handleSubmit = e => {
-    const { spanishWord = '', handleSuccess } = this.props;
+    const { foreignWord = '', handleSuccess } = this.props;
     const { value } = this.state;
     e.preventDefault();
-    if (value !== spanishWord) {
-      const correctLetters = this.compareAttemptWithCorrectWord(
-        spanishWord,
-        value
-      );
+    if (value !== foreignWord) {
+      const correctLetters = compareAttemptWithCorrectWord(foreignWord, value);
       this.setState({ value: '', prevAttempt: correctLetters, giveHelp: true });
     } else {
       this.setState({ value: '', prevAttempt: {} });
       handleSuccess();
     }
   };
-  compareAttemptWithCorrectWord = (correctWord, attempt) => {
-    correctWord = correctWord.split('');
-    const correctLetters = {};
-    const freq = {};
-    for (let i = 0; i < correctWord.length; i++) {
-      if (freq[correctWord[i]]) {
-        freq[correctWord[i]].push(i);
-      } else {
-        freq[correctWord[i]] = [i];
-      }
-    }
-    for (let i = 0; i < attempt.length; i++) {
-      const letter = attempt[i];
-      if (freq[letter]) {
-        const correctIdx = freq[letter].shift();
-        correctLetters[correctIdx] = letter;
-      }
-    }
-    return correctLetters;
-  };
 
-  generateLetters = (spanishWord, prevAttempt) => {
-    return spanishWord.split('').map((letter, i) => {
+  generateLetters = (foreignWord, prevAttempt) => {
+    return foreignWord.split('').map((letter, i) => {
       return (
         <HintLetter key={i} letter={letter} isCorrect={!!prevAttempt[i]} />
       );
@@ -54,48 +32,48 @@ export default class WordInputField extends React.Component {
 
   render() {
     const { value, prevAttempt, giveHelp } = this.state;
-    const { spanishWord = '' } = this.props;
+    const { foreignWord = '' } = this.props;
     return (
-      <div className="sf-WordInputField">
+      <div className="word-input-field">
         <form onSubmit={this.handleSubmit}>
           {giveHelp && (
-            <span className="sf-WordInputField--letterContainer">
-              {this.generateLetters(spanishWord, prevAttempt)}
+            <span className="word-input-field--letter-container">
+              {this.generateLetters(foreignWord, prevAttempt)}
             </span>
           )}
           <input
-            className="sf-WordInputField--input"
+            className="word-input-field--input"
             type="text"
             value={value}
             onChange={this.handleChange}
           />
         </form>
         <style jsx>{`
-          .sf-WordInputField {
+          .word-input-field {
             display: inline-block;
             font-family: monospace;
           }
-          .sf-WordInputField--letterContainer,
-          .sf-WordInputField--input {
+          .word-input-field--letter-container,
+          .word-input-field--input {
             font-family: monospace;
             font-size: 1.5rem;
             padding: 5px;
           }
-          .sf-WordInputField--letterContainer {
+          .word-input-field--letter-container {
             position: absolute;
           }
-          .sf-WordInputField--input {
+          .word-input-field--input {
             color: green;
             outline: none;
             border: none;
             background: ${polar2};
             box-sizing: border-box;
-            width: calc(${spanishWord.length} * 1rem + 5px);
+            width: calc(${foreignWord.length} * 1rem + 5px);
           }
-          sf-WordInputField--input:focus {
+          word-input-field--input:focus {
             outline: none;
           }
-          .sf-WordInputField span {
+          .word-input-field span {
             opacity: 0.5;
             pointer-events: none;
           }
@@ -106,7 +84,7 @@ export default class WordInputField extends React.Component {
 }
 
 WordInputField.propTypes = {
-  spanishWord: PropTypes.string,
+  foreignWord: PropTypes.string,
   handleSuccess: PropTypes.func,
   value: PropTypes.string,
   giveHelp: PropTypes.bool

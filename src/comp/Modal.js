@@ -2,7 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
-export default class SFModal extends React.Component {
+export default class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.modalRoot = document.getElementById('modal');
@@ -13,6 +13,6 @@ export default class SFModal extends React.Component {
   }
 }
 
-SFModal.propTypes = {
+Modal.propTypes = {
   children: PropTypes.node
 };

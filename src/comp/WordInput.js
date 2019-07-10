@@ -3,38 +3,38 @@ import PropTypes from 'prop-types';
 import WordInputField from './WordInputField';
 
 export default function WordInput({
-  spanishWord = '',
-  spanishPhrase = '',
+  foreignWord = '',
+  foreignPhrase = '',
   handleSuccess,
   isCorrect
 }) {
-  const [front, end] = spanishPhrase.split('*');
+  const [front, end] = foreignPhrase.split('*');
   return (
-    <div className="sf-WordInput">
-      <div className="sf-WordInput--article">
+    <div className="word-input">
+      <div className="word-input--article">
         <span>{front}</span>
         {isCorrect ? (
-          <span className="sf-WordInput--correctWord">{spanishWord}</span>
+          <span className="word-input--correct-word">{foreignWord}</span>
         ) : (
           <WordInputField
-            spanishWord={spanishWord}
+            foreignWord={foreignWord}
             handleSuccess={handleSuccess}
           />
         )}
         <span>{end}</span>
       </div>
       <style jsx>{`
-        .sf-WordInput {
+        .word-input {
           font-size: 1.5rem;
           display: inline-block;
           color: green;
         }
-        .sf-WordInput--correctWord {
+        .word-input--correct-word {
           color: lightgreen;
           border-bottom-width: 2px;
           border-bottom-style: solid;
         }
-        .sf-WordInput--article {
+        .word-input--article {
           display: inline-block;
           margin-right: 5px;
         }
@@ -44,8 +44,8 @@ export default function WordInput({
 }
 
 WordInput.propTypes = {
-  spanishWord: PropTypes.string,
-  spanishPhrase: PropTypes.string,
+  foreignWord: PropTypes.string,
+  foreignPhrase: PropTypes.string,
   handleSuccess: PropTypes.func,
   isCorrect: PropTypes.bool
 };

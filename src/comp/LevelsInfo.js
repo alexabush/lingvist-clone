@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SFProgressCircles from './SFProgressCircles';
+import ProgressCircles from './ProgressCircles';
 import Link from 'next/link';
 
 export default function LevelsInfo() {
@@ -8,8 +8,8 @@ export default function LevelsInfo() {
     e.stopPropagation();
   }
   return (
-    <div className="sf-LevelsInfo">
-      <div onClick={stopProp} className="sf-LevelsInfoCard">
+    <div className="levels-info">
+      <div onClick={stopProp} className="levels-info-card">
         <h3>The Lingvist levels of learning</h3>
         <p>
           The Lingvist algorithm uses spaced repetition, showing you the words
@@ -36,14 +36,14 @@ export default function LevelsInfo() {
         </Link>
       </div>
       <style jsx>{`
-        .sf-LevelsInfo {
+        .levels-info {
           min-height: 100vh;
           background: darkblue;
           display: flex;
           justify-content: center;
           align-items: center;
         }
-        .sf-LevelsInfoCard {
+        .levels-info-card {
           padding: 5px 30px;
           max-width: 400px;
           max-height: 450px;
@@ -58,7 +58,7 @@ export default function LevelsInfo() {
 
 function RepetitionInfo() {
   return (
-    <div className="sf-RepetitionInfo">
+    <div className="repetition-info">
       <RepetitionInfoLevel
         num={5}
         text="Maximum memory strength!"
@@ -85,7 +85,7 @@ function RepetitionInfo() {
         color="darkorange"
       />
       <style jsx>{`
-        .sf-RepetitionInfo {
+        .repetition-info {
           padding: 3px 0;
         }
       `}</style>
@@ -95,17 +95,17 @@ function RepetitionInfo() {
 
 export function RepetitionInfoLevel({ text, num }) {
   return (
-    <div className="sf-RepetitionInfoLevel">
-      <div className="SFProgressCircles--container">
-        <SFProgressCircles wordStrength={num} />
+    <div className="repetition-info-level">
+      <div className="progress-circles--container">
+        <ProgressCircles wordStrength={num} />
       </div>
-      <div className="infoText">{text}</div>
+      <div className="info-text">{text}</div>
       <style jsx>{`
-        .sf-RepetitionInfoLevel {
+        .repetition-info-level {
           padding: 3px;
           display: flex;
         }
-        .SFProgressCircles--container {
+        .progress-circles--container {
           margin: 0 10px;
           padding: 5px 0;
         }
