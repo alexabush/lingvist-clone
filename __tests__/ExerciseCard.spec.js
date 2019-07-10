@@ -12,7 +12,7 @@ describe('ExerciseCard', () => {
   });
   it('hides middle of 3 components on click', function() {
     expect(wrap.children().props().children[1]).toBeTruthy();
-    wrap.find('.ExerciseCardHeader').simulate('click');
+    wrap.find('.exercise-card-header').simulate('click');
     expect(wrap.children().props().children[1]).toEqual(false);
   });
 });
