@@ -26,7 +26,8 @@ export default class SFScroller extends React.PureComponent {
   }
 
   handleScroll = () => {
-    this.props.onSlide();
+    const { onSlide } = this.props;
+    onSlide();
     const scroller = this.sfscroller.current;
     const showGradientCoordinate = 1;
     let newState = { ...this.state };

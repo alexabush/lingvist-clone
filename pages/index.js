@@ -1,11 +1,18 @@
 import React from 'react';
-import ExerciseCard from '../src/comp/ExerciseCard';
+import Link from 'next/link';
 
-export default function DisplayAll() {
-  return (
-    <div style={{ margin: '30px' }}>
-      <h2>SFCard</h2>
-      <ExerciseCard />
-    </div>
-  );
-}
+const Index = () => (
+  <div>
+    <Link href="/fitness">
+      <a>Fitness App</a>
+    </Link>
+    <Link href="/lingvist">
+      <a>Language App</a>
+    </Link>
+    <Link href="/levels">
+      <a>Levels</a>
+    </Link>
+  </div>
+);
+
+export default Index;
