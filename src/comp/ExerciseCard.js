@@ -1,5 +1,5 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 import SFCard from './SFCard';
 import ExerciseCardHeader from './ExerciseCardHeader';
 import ExerciseCardFooter from './ExerciseCardFooter';
@@ -34,6 +34,6 @@ export default class ExerciseCard extends React.PureComponent {
   }
 }
 
-ExerciseCardFooter.T = {
-  exerciseWeight: T.number
+ExerciseCardFooter.propTypes = {
+  exerciseWeight: PropTypes.number
 };

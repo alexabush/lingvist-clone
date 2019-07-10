@@ -1,6 +1,8 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 import ChicletGroup from './ChicletGroup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
 export default function ExerciseCardHeader({
   exerciseName,
@@ -12,42 +14,48 @@ export default function ExerciseCardHeader({
     onClick();
   };
   return (
-    <div className="ExerciseCardHeader" onClick={handleClick}>
-      <div className="ExerciseCardHeader--splitContainer">
+    <div className="exercise-card-header" onClick={handleClick}>
+      <div className="exercise-card-header--split-container">
         <h2>{exerciseName}</h2>
+
         <ChicletGroup />
       </div>
-      <div className="ExerciseCardHeader--details">
-        <div className="ExerciseCardHeader--equipmentContainer">
+      <div className="exercise-card-header--details">
+        <div className="exercise-card-header--equipment-container">
           <span>{equipment}</span>
-          <span>*</span>
+          <span className="icon-container">
+            <FontAwesomeIcon icon={faDumbbell} />
+          </span>
         </div>
-        <div className="ExerciseCardHeader--variationsContainer">
+        <div className="exercise-card-header--variations-container">
           <span>{variations.join(', ')}</span>
         </div>
       </div>
 
       <style jsx>{`
-        .ExerciseCardHeader {
+        .exercise-card-header {
         }
-        .ExerciseCardHeader--splitContainer {
+        .exercise-card-header--split-container {
           width: 100%;
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
-        .ExerciseCardHeader--variationsContainer,
-        .ExerciseCardHeader--equipmentContainer {
+        .exercise-card-header--variations-container,
+        .exercise-card-header--equipment-container {
           display: inline-block;
+        }
+        .icon-container {
+          padding: 0 10px;
         }
       `}</style>
     </div>
   );
 }
 
-ExerciseCardHeader.T = {
-  exerciseName: T.string,
-  equipment: T.string,
-  variations: T.arrayOf(T.string),
-  onClick: T.func
+ExerciseCardHeader.propTypes = {
+  exerciseName: PropTypes.string,
+  equipment: PropTypes.string,
+  variations: PropTypes.arrayOf(PropTypes.string),
+  onClick: PropTypes.func
 };
