@@ -3,19 +3,19 @@ import Lingvist from './Lingvist';
 
 const data = [
   {
-    spanishWord: 'trabajo',
-    spanishPhrase: 'El * duro',
-    englishPhrase: 'The hard work',
-    englishWord: ['the work', 'the job'],
+    foreignWord: 'trabajo',
+    foreignPhrase: 'El * duro',
+    nativePhrase: 'The hard work',
+    nativeWord: ['the work', 'the job'],
     wordStrength: 1,
     wordDetails: 'masculine, singular',
     partOfSpeech: 'Noun'
   },
   {
-    spanishWord: 'vez',
-    spanishPhrase: 'Una otra *',
-    englishPhrase: 'One more time',
-    englishWord: ['once'],
+    foreignWord: 'vez',
+    foreignPhrase: 'Una otra *',
+    nativePhrase: 'One more time',
+    nativeWord: ['once'],
     wordStrength: 4,
     wordDetails: 'feminine, singular',
     partOfSpeech: 'Noun'
@@ -25,54 +25,73 @@ const data = [
 class LingvistData {
   constructor(cardData = {}, index = 0) {
     this.cardData = cardData;
-    this.index = index;
+    this._index = index;
   }
 
-  get getIndex() {
-    return this.index;
+  get index() {
+    return this._index;
   }
-  set setIndex(newIndex) {
-    this.index = newIndex;
-    return this.index;
+  set index(newIndex) {
+    // need to check if newIndex valid or other methods will break
+    this._index = newIndex;
   }
 
-  get foreignLanguageWord() {
-    return this.cardData[this.getIndex].spanishWord;
+  get foreignWord() {
+    return this.cardData[this.index].foreignWord;
   }
-  get foreignLanguagePhrase() {
-    return this.cardData[this.getIndex].spanishPhrase;
+  get foreignPhrase() {
+    return this.cardData[this.index].foreignPhrase;
   }
-  get homeLanguagePhrase() {
-    return this.cardData[this.getIndex].englishPhrase;
+  get nativePhrase() {
+    return this.cardData[this.index].nativePhrase;
   }
-  get homeLanguageWord() {
-    return this.cardData[this.getIndex].englishWord;
+  get nativeWord() {
+    return this.cardData[this.index].nativeWord;
   }
   get wordStrength() {
-    return this.cardData[this.getIndex].wordStrength;
+    return this.cardData[this.index].wordStrength;
   }
   set wordStrength(newWordStrength) {
-    this.cardData[this.getIndex].wordStrength = newWordStrength;
+    this.cardData[this.index].wordStrength = newWordStrength;
   }
   get wordDetails() {
-    return this.cardData[this.getIndex].wordDetails;
+    return this.cardData[this.index].wordDetails;
   }
   get partOfSpeech() {
-    return this.cardData[this.getIndex].partOfSpeech;
+    return this.cardData[this.index].partOfSpeech;
   }
 }
+export default class LingvistContainer extends React.Component {
+  state = {
+    model: new LingvistData(data, 0)
+  };
 
-export default function LingvistContainer() {
-  const model = new LingvistData(data, 0);
-  return (
-    <Lingvist
-      spanishWord={model.foreignLanguageWord}
-      spanishPhrase={model.foreignLanguagePhrase}
-      englishPhrase={model.homeLanguagePhrase}
-      englishWord={model.homeLanguageWord}
-      wordStrength={model.wordStrength}
-      wordDetails={model.wordDetails}
-      partOfSpeech={model.partOfSpeech}
-    />
-  );
+  updateWordStrength = newWordStrength => {
+    let m = this.state.model;
+    m.cardData[m.index].wordStrength = newWordStrength;
+    this.setState({ model: m });
+  };
+  updateIndex = newIndex => {
+    let m = this.state.model;
+    m.index = newIndex;
+    this.setState({ model: m });
+  };
+
+  render() {
+    const { model } = this.state;
+    return (
+      <Lingvist
+        foreignWord={model.foreignWord}
+        foreignPhrase={model.foreignPhrase}
+        nativePhrase={model.nativePhrase}
+        nativeWord={model.nativeWord}
+        wordStrength={model.wordStrength}
+        wordDetails={model.wordDetails}
+        partOfSpeech={model.partOfSpeech}
+        currentIndex={model.index}
+        updateWordStrength={this.updateWordStrength}
+        updateIndex={this.updateIndex}
+      />
+    );
+  }
 }
