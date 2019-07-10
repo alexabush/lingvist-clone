@@ -3,6 +3,9 @@ import Link from 'next/link';
 
 const Index = () => (
   <div>
+    <Link href="/fitness">
+      <a>Fitness App</a>
+    </Link>
     <Link href="/lingvist">
       <a>Language App</a>
     </Link>

@@ -1,10 +1,11 @@
-import R from 'react';
+import React from 'react';
 import T from 'prop-types';
 import { polar1 } from '../colors';
+import SFScrollerNumber from './SFScrollerNumber';
 
-export default class SFScroller extends R.PureComponent {
+export default class SFScroller extends React.PureComponent {
   static propTypes = {
-    values: T.array,
+    values: T.arrayOf(T.number),
     modifiers: T.object,
     onChange: T.func,
     onSlide: T.func
@@ -72,18 +73,17 @@ export default class SFScroller extends R.PureComponent {
     return (
       <div onScroll={this.handleScroll} className="sf-scroller--container">
         <div className={`${fadeRight}`} />
-        <div ref={this.sfscroller} className="SFScroller">
+        <div ref={this.sfscroller} className="sf-scroller">
           {this.renderNumbers()}
           <div className={`${fadeLeft}`} />
         </div>
         <style jsx>{`
           .sf-scroller--container {
             position: relative;
-            box-shadow: 0.5px 0.5px 0.5px 0.5px;
+            overflow-x: auto;
           }
-          .SFScroller {
+          .sf-scroller {
             display: flex;
-            min-width: 100%;
             overflow-x: auto;
           }
           ::-webkit-scrollbar {
@@ -108,25 +108,4 @@ export default class SFScroller extends R.PureComponent {
       </div>
     );
   }
-}
-
-function SFScrollerNumber({ number, modifier, handleClick }) {
-  return (
-    <div className="sf-scroller-number" onClick={() => handleClick(number)}>
-      {number}
-      <div>{modifier}</div>
-      <style jsx>{`
-        .sf-scroller-number {
-          padding: 10px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          min-width: 50px;
-          height: 50px;
-          font-size: 32px;
-          position: relative;
-        }
-      `}</style>
-    </div>
-  );
 }

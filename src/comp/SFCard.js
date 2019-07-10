@@ -1,10 +1,10 @@
 import React from 'react';
 import T from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class SFCard extends React.Component {
   static propTypes = {
-    children: T.any,
+    children: T.any
   };
 
   renderChildren = () => {
@@ -21,7 +21,7 @@ export default class SFCard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="SFCard">
         <ReactCSSTransitionGroup
           transitionName={'sf-Card--toggle'}
           transitionEnterTimeout={1000}
@@ -30,6 +30,11 @@ export default class SFCard extends React.Component {
           {this.renderChildren()}
         </ReactCSSTransitionGroup>
         <style jsx global>{`
+          .SFCard {
+            background: white;
+            border-radius: 10px;
+            padding: 0 40px;
+          }
           .sf-Card--toggle-enter {
             max-height: 0px;
           }
