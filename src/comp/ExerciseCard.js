@@ -26,6 +26,7 @@ export default class ExerciseCard extends React.PureComponent {
           equipment={'Bench Press'}
           variations={['15 deg Incline', '45 deg Incline']}
           onClick={this.toggleExpand}
+          withChiclets
         />
         {this.state.isExpanded && <ExtraWorkoutInfo />}
         <ExerciseCardFooter exerciseWeight={exerciseWeight} />
