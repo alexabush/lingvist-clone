@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ChicletGroup from './ChicletGroup';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import ExerciseSpecs from './ExerciseSpecs';
 
 export default function ExerciseCardHeader({
   exerciseName,
   equipment,
   variations,
+  withChiclets,
   onClick
 }) {
   const handleClick = () => {
@@ -17,21 +17,9 @@ export default function ExerciseCardHeader({
     <div className="exercise-card-header" onClick={handleClick}>
       <div className="exercise-card-header--split-container">
         <h2>{exerciseName}</h2>
-
-        <ChicletGroup />
+        {withChiclets && <ChicletGroup />}
       </div>
-      <div className="exercise-card-header--details">
-        <div className="exercise-card-header--equipment-container">
-          <span>{equipment}</span>
-          <span className="icon-container">
-            <FontAwesomeIcon icon={faDumbbell} />
-          </span>
-        </div>
-        <div className="exercise-card-header--variations-container">
-          <span>{variations.join(', ')}</span>
-        </div>
-      </div>
-
+      <ExerciseSpecs equipment={equipment} variations={variations} />
       <style jsx>{`
         .exercise-card-header {
         }
@@ -40,13 +28,6 @@ export default function ExerciseCardHeader({
           display: flex;
           justify-content: space-between;
           align-items: center;
-        }
-        .exercise-card-header--variations-container,
-        .exercise-card-header--equipment-container {
-          display: inline-block;
-        }
-        .icon-container {
-          padding: 0 10px;
         }
       `}</style>
     </div>
@@ -57,5 +38,6 @@ ExerciseCardHeader.propTypes = {
   exerciseName: PropTypes.string,
   equipment: PropTypes.string,
   variations: PropTypes.arrayOf(PropTypes.string),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  withChiclets: PropTypes.bool
 };
