@@ -14,7 +14,14 @@ export default class AddWorkout extends React.PureComponent {
   };
 
   render() {
-    const { exerciseName, text, options, max } = this.props;
+    const {
+      exerciseName,
+      nextScreen,
+      isSelect,
+      text,
+      options,
+      max
+    } = this.props;
     const { selected } = this.state;
     return (
       <div className="add-workout--container">
@@ -22,14 +29,18 @@ export default class AddWorkout extends React.PureComponent {
           <ExerciseCardHeader exerciseName={exerciseName} />
         </div>
         <div className="add-workout--item-container">
-          <SelectCard
-            text={text}
-            handleSubmit={this.handleSubmission}
-            options={options}
-            max={max}
-          />
+          {isSelect ? (
+            <SelectCard
+              text={text}
+              handleSubmit={this.handleSubmission}
+              options={options}
+              max={max}
+            />
+          ) : (
+            <div>hi</div>
+          )}
         </div>
-        <Link href="/addWorkout2">
+        <Link href={nextScreen}>
           <a>Select</a>
         </Link>
         <style jsx>{`

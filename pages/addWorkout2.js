@@ -9,6 +9,8 @@ export default function AddWorkout2({ exerciseName }) {
       text={'Which variations would you like to do?'}
       max={null}
       equipment={'Nice Equipment'}
+      nextScreen={'/addWorkout3'}
+      isSelect
       options={[
         {
           label: 'Standard',

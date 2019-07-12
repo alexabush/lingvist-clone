@@ -35,7 +35,7 @@ export default class SelectField extends React.Component {
             <div
               className={`select-field-options ${this.isSelected(value)}`}
               key={value}
-              onClick={e => {
+              onClick={() => {
                 this.handleSelect(value);
               }}
             >

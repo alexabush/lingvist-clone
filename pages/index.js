@@ -15,6 +15,9 @@ const Index = () => (
     <Link href="/levels">
       <a>Levels</a>
     </Link>
+    <Link href="/addWorkout3">
+      <a>madlib</a>
+    </Link>
   </div>
 );
 

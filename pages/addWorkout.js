@@ -7,7 +7,9 @@ export default function AddWorkout1({ exerciseName }) {
     <AddWorkout
       exerciseName="Chest Press"
       text={'Which equipment would you like to use?'}
+      nextScreen={'/addWorkout2'}
       max={1}
+      isSelect
       options={[
         {
           label: 'Barbell',
