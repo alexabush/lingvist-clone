@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Router from 'next/router';
 import PropTypes from 'prop-types';
 
 class Input extends Component {
@@ -9,25 +8,41 @@ class Input extends Component {
 
   render() {
     return (
-      <input
-        type="text"
-        value={this.props.value}
-        onChange={this.handleChange}
-      />
+      <span className="madlib-input--container">
+        <input
+          type="text"
+          value={this.props.value}
+          onChange={this.handleChange}
+        />
+        <style jsx>{`
+          .madlib-input--container input {
+            font-size: 1.5rem;
+            padding: 5px;
+            width: 40px;
+            background: lightgrey;
+            border: none;
+            outline: none;
+            margin: 0 5px;
+          }
+        `}</style>
+      </span>
     );
   }
 }
 
-const Text = ({ children }) => <div>{children}</div>;
+const Text = ({ children }) => (
+  <span>
+    {children}
+    <style jsx>{``}</style>
+  </span>
+);
 
 class Madlib extends Component {
   state = { values: [] };
-  handleNext = () => {
+  changeUpdate = () => {
     let processedVals = this.processValues(this.state.values);
+    this.props.onChange(processedVals);
     console.log(processedVals);
-    Router.push({
-      pathname: '/fitness'
-    });
   };
   processValues = values => {
     return values.filter(val => {
@@ -42,12 +57,13 @@ class Madlib extends Component {
             const valuesCopy = this.state.values;
             valuesCopy[valIdx] = val;
             this.setState({ values: valuesCopy });
+            this.changeUpdate();
           },
           value: this.state.values[this.state.count],
           idx
         });
       } else {
-        return <div>{child}</div>;
+        return child;
       }
     });
   };
@@ -55,7 +71,7 @@ class Madlib extends Component {
     return (
       <div>
         {this.renderChildren()}
-        <button onClick={this.handleNext}>Next</button>
+        <style jsx>{``}</style>
       </div>
     );
   }

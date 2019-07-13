@@ -1,48 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Router from 'next/router';
 import ExerciseCardHeader from './ExerciseCardHeader';
 import SelectField from './SelectField';
-import Link from 'next/link';
+import Madlib from './Madlib';
 
 export default class AddWorkout extends React.PureComponent {
   state = {
-    selected: []
+    data: []
   };
-  handleSubmission = data => {
-    console.log(data);
-    this.setState({ selected: data });
+  handleNext = () => {
+    console.log(this.state.data);
+    Router.push({
+      pathname: `${this.props.nextScreen}`
+    });
+  };
+  handleChange = newData => {
+    this.setState({ data: newData });
+    console.log(newData);
   };
 
   render() {
-    const {
-      exerciseName,
-      nextScreen,
-      isSelect,
-      text,
-      options,
-      max
-    } = this.props;
-    const { selected } = this.state;
+    const { exerciseName, text, options, max } = this.props;
+    const { data } = this.state;
     return (
       <div className="add-workout--container">
         <div className="exercise-specs--container add-workout--item-container">
           <ExerciseCardHeader exerciseName={exerciseName} />
         </div>
         <div className="add-workout--item-container">
-          {isSelect ? (
-            <SelectCard
-              text={text}
-              handleSubmit={this.handleSubmission}
-              options={options}
-              max={max}
-            />
-          ) : (
-            <div>hi</div>
-          )}
+          <SelectCard
+            text={text}
+            handleChange={this.handleChange}
+            options={options}
+            max={max}
+          />
         </div>
-        <Link href={nextScreen}>
-          <a>Select</a>
-        </Link>
+        <button onClick={this.handleNext}>Next</button>
         <style jsx>{`
           .add-workout--container {
           }
@@ -65,12 +59,23 @@ AddWorkout.propTypes = {
   exerciseWeight: PropTypes.number
 };
 
-function SelectCard({ text, handleSubmit, options, max }) {
+function SelectCard({ text, handleChange, options, max }) {
   return (
     <div>
       <h3>{text}</h3>
       <hr />
-      <SelectField max={max} onChange={handleSubmit} options={options} />
+      {options ? (
+        <SelectField max={max} onChange={handleChange} options={options} />
+      ) : (
+        <Madlib onChange={handleChange}>
+          <Madlib.Input />
+          <Madlib.Text>sets of</Madlib.Text>
+          <Madlib.Input />
+          <Madlib.Text>reps at</Madlib.Text>
+          <Madlib.Input />
+          <Madlib.Text>kg</Madlib.Text>
+        </Madlib>
+      )}
     </div>
   );
 }
