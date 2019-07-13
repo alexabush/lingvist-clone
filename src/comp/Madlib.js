@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
+import Router from 'next/router';
 import PropTypes from 'prop-types';
 
 class Input extends Component {
-  state = { value: '' };
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
+  handleChange = e => {
+    this.props.update(e.target.value, this.props.idx);
+  };
 
   render() {
     return (
       <input
         type="text"
-        value={this.state.value}
+        value={this.props.value}
         onChange={this.handleChange}
       />
     );
@@ -20,20 +20,42 @@ class Input extends Component {
 
 const Text = ({ children }) => <div>{children}</div>;
 
-// would need to pass state from chldren back up
-// I might need to use React.children for this to work
 class Madlib extends Component {
-  handleSubmit = event => {
-    console.log('submit');
-    event.preventDefault();
+  state = { values: [] };
+  handleNext = () => {
+    let processedVals = this.processValues(this.state.values);
+    console.log(processedVals);
+    Router.push({
+      pathname: '/fitness'
+    });
+  };
+  processValues = values => {
+    return values.filter(val => {
+      return typeof val !== 'undefined';
+    });
+  };
+  renderChildren = () => {
+    return React.Children.map(this.props.children, (child, idx) => {
+      if (child.type.name === 'Input') {
+        return React.cloneElement(child, {
+          update: (val, valIdx) => {
+            const valuesCopy = this.state.values;
+            valuesCopy[valIdx] = val;
+            this.setState({ values: valuesCopy });
+          },
+          value: this.state.values[this.state.count],
+          idx
+        });
+      } else {
+        return <div>{child}</div>;
+      }
+    });
   };
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          {this.props.children}
-          <input type="submit" value="Submit" />
-        </form>
+        {this.renderChildren()}
+        <button onClick={this.handleNext}>Next</button>
       </div>
     );
   }
