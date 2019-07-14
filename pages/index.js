@@ -6,14 +6,14 @@ const Index = () => (
     <Link href="/fitness">
       <a>Exercise Card</a>
     </Link>
-    <Link href="/addWorkout1">
-      <a>Add Workout Screen 1</a>
+    <Link href="/addEquipment">
+      <a>Equipment (Add Workout Screen 1)</a>
     </Link>
-    <Link href="/addWorkout2">
-      <a>Add Workout Screen 2</a>
+    <Link href="/addVariations">
+      <a>Variations (Add Workout Screen 2)</a>
     </Link>
-    <Link href="/addWorkout3">
-      <a>Add Workout Screen 3</a>
+    <Link href="/addWorkoutSchema">
+      <a>Schema (Add Workout Screen 3)</a>
     </Link>
 
     <Link href="/lingvist">
