@@ -30,34 +30,30 @@ export default class AddWorkout extends React.PureComponent {
     } = this.props;
     return (
       <div className="add-workout--container">
-        <div className="exercise-specs--container add-workout--item-container">
+        <div className="add-workout--card-container">
           <ExerciseCardHeader
             exerciseName={exerciseName}
             equipment={equipment}
             variations={variations}
           />
         </div>
-        <div className="add-workout--item-container">
+        <div className="add-workout--card-container">
           <SelectCard
             text={text}
             handleChange={this.handleChange}
             options={options}
             max={max}
           />
-          <button
-            className="add-workout--next-button"
-            onClick={this.handleNext}
-          >
-            Next
-          </button>
         </div>
+        <button className="add-workout--next-button" onClick={this.handleNext}>
+          Next
+        </button>
         <style jsx>{`
           .add-workout--container {
-          }
-          .add-workout--item-container {
             margin: 20px;
           }
-          .exercise-specs--container {
+          .add-workout--card-container {
+            margin: 20px 0;
             padding: 0 25px 10px 25px;
             background: white;
             box-shadow: 1px 1px 5px 1px #888888;
@@ -94,21 +90,34 @@ AddWorkout.propTypes = {
 
 function SelectCard({ text, handleChange, options, max }) {
   return (
-    <div>
+    <div className="select-card--container">
       <h3>{text}</h3>
       <hr />
       {options ? (
         <SelectField max={max} onChange={handleChange} options={options} />
       ) : (
-        <Madlib onChange={handleChange}>
-          <Madlib.Input />
-          <Madlib.Text>sets of</Madlib.Text>
-          <Madlib.Input />
-          <Madlib.Text>reps at</Madlib.Text>
-          <Madlib.Input />
-          <Madlib.Text>kg</Madlib.Text>
-        </Madlib>
+        <div className="select-card--madlibs-container">
+          <Madlib onChange={handleChange}>
+            <Madlib.Input />
+            <Madlib.Text>sets of</Madlib.Text>
+            <Madlib.Input />
+            <Madlib.Text>reps at</Madlib.Text>
+            <Madlib.Input />
+            <Madlib.Text>kg</Madlib.Text>
+          </Madlib>
+        </div>
       )}
+      <style jsx>{`
+        .select-card--container {
+          padding: 10px 0;
+        }
+        .select-card--container h3 {
+          margin: 0;
+        }
+        .select-card--madlibs-container {
+          padding: 5px 0;
+        }
+      `}</style>
     </div>
   );
 }

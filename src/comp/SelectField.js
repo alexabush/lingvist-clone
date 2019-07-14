@@ -46,7 +46,7 @@ export default class SelectField extends React.Component {
         <style jsx>{`
           .select-field-options {
             display: inline-block;
-            padding: 3px 5px;
+            padding: 5px 7px;
             margin: 3px;
             border-radius: 3px;
             color: white;

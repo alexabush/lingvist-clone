@@ -5,7 +5,7 @@ export default function AddWorkoutSchema() {
   return (
     <AddWorkout
       exerciseName="Chest Press"
-      text={'Which variations would you like to do?'}
+      text={'What is your commitment?'}
       max={null}
       equipment={'Nice Equipment'}
       variations={['Variation 1', 'Variation 2']}

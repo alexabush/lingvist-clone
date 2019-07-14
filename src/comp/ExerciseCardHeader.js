@@ -23,6 +23,9 @@ export default function ExerciseCardHeader({
       <style jsx>{`
         .exercise-card-header {
         }
+        .exercise-card-header h2 {
+          margin: 10px 0;
+        }
         .exercise-card-header--split-container {
           width: 100%;
           display: flex;
