@@ -17,14 +17,13 @@ export default class ExerciseCard extends React.PureComponent {
   };
 
   render() {
-    // const {exerciseWeight} = this.props
-    const exerciseWeight = 180;
+    const { exerciseName, exerciseWeight, equipment, variations } = this.props;
     return (
       <SFCard>
         <ExerciseCardHeader
-          exerciseName={'Bench Press'}
-          equipment={'Bench Press'}
-          variations={['15 deg Incline', '45 deg Incline']}
+          exerciseName={exerciseName}
+          equipment={equipment}
+          variations={variations}
           onClick={this.toggleExpand}
           withChiclets
         />
@@ -35,6 +34,9 @@ export default class ExerciseCard extends React.PureComponent {
   }
 }
 
-ExerciseCardFooter.propTypes = {
-  exerciseWeight: PropTypes.number
+ExerciseCard.propTypes = {
+  exerciseName: PropTypes.exerciseName,
+  exerciseWeight: PropTypes.number,
+  equipment: PropTypes.string,
+  variations: PropTypes.arrayOf(PropTypes.string)
 };

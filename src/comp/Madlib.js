@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 class Input extends Component {
   handleChange = e => {
-    this.props.update(e.target.value, this.props.idx);
+    const { update, idx } = this.props;
+    update(e.target.value, idx);
   };
 
   render() {
@@ -30,12 +31,22 @@ class Input extends Component {
   }
 }
 
+Input.propTypes = {
+  idx: PropTypes.number,
+  value: PropTypes.number,
+  update: PropTypes.fn
+};
+
 const Text = ({ children }) => (
   <span>
     {children}
     <style jsx>{``}</style>
   </span>
 );
+
+Text.propTypes = {
+  children: PropTypes.node
+};
 
 class Madlib extends Component {
   state = { values: [] };
@@ -76,6 +87,11 @@ class Madlib extends Component {
     );
   }
 }
+
+Madlib.propTypes = {
+  onChange: PropTypes.fn,
+  children: PropTypes.node
+};
 
 export default Madlib;
 Madlib.Input = Input;

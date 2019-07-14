@@ -31,3 +31,8 @@ export default function ExerciseSpecs({ equipment, variations }) {
     </div>
   );
 }
+
+ExerciseSpecs.propTypes = {
+  equipment: PropTypes.equipment,
+  variations: PropTypes.variations
+};

@@ -17,7 +17,7 @@ export default class AddWorkout extends React.PureComponent {
   };
   handleChange = newData => {
     this.setState({ data: newData });
-    console.log(newData);
+    console.log('addworkout handlechange', newData);
   };
 
   render() {
@@ -56,7 +56,16 @@ export default class AddWorkout extends React.PureComponent {
 }
 
 AddWorkout.propTypes = {
-  exerciseWeight: PropTypes.number
+  nextScreen: PropTypes.string,
+  exerciseName: PropTypes.string,
+  text: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.number
+    })
+  ),
+  max: PropTypes.number
 };
 
 function SelectCard({ text, handleChange, options, max }) {
@@ -79,3 +88,15 @@ function SelectCard({ text, handleChange, options, max }) {
     </div>
   );
 }
+
+SelectCard.propTypes = {
+  handleChange: PropTypes.fn,
+  text: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.number
+    })
+  ),
+  max: PropTypes.number
+};

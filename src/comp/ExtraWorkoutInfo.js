@@ -22,6 +22,4 @@ export default function ExtraWorkoutInfo() {
   );
 }
 
-ExtraWorkoutInfo.propTypes = {
-  exerciseWeight: PropTypes.number
-};
+ExtraWorkoutInfo.propTypes = {};
