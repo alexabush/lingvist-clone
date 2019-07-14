@@ -17,13 +17,14 @@ class Input extends Component {
         />
         <style jsx>{`
           .madlib-input--container input {
-            font-size: 1.5rem;
+            font-size: 2rem;
             padding: 5px;
-            width: 45px;
+            width: 55px;
             background: lightgrey;
             border: none;
             outline: none;
             margin: 0 5px;
+            text-align: center;
           }
         `}</style>
       </span>
@@ -37,7 +38,14 @@ Input.propTypes = {
   update: PropTypes.func
 };
 
-const Text = ({ children }) => <span>{children}</span>;
+const Text = ({ children }) => (
+  <span>
+    {children}
+    <style jsx>{`
+      font-size: 1.3rem;
+    `}</style>
+  </span>
+);
 
 Text.propTypes = {
   children: PropTypes.node
