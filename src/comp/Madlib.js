@@ -19,7 +19,7 @@ class Input extends Component {
           .madlib-input--container input {
             font-size: 1.5rem;
             padding: 5px;
-            width: 40px;
+            width: 45px;
             background: lightgrey;
             border: none;
             outline: none;
@@ -34,15 +34,10 @@ class Input extends Component {
 Input.propTypes = {
   idx: PropTypes.number,
   value: PropTypes.number,
-  update: PropTypes.fn
+  update: PropTypes.func
 };
 
-const Text = ({ children }) => (
-  <span>
-    {children}
-    <style jsx>{``}</style>
-  </span>
-);
+const Text = ({ children }) => <span>{children}</span>;
 
 Text.propTypes = {
   children: PropTypes.node
@@ -53,7 +48,6 @@ class Madlib extends Component {
   changeUpdate = () => {
     let processedVals = this.processValues(this.state.values);
     this.props.onChange(processedVals);
-    console.log(processedVals);
   };
   processValues = values => {
     return values.filter(val => {
@@ -89,7 +83,7 @@ class Madlib extends Component {
 }
 
 Madlib.propTypes = {
-  onChange: PropTypes.fn,
+  onChange: PropTypes.func,
   children: PropTypes.node
 };
 

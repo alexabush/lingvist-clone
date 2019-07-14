@@ -10,23 +10,32 @@ export default class AddWorkout extends React.PureComponent {
     data: []
   };
   handleNext = () => {
-    console.log(this.state.data);
+    // TODO add data in state to mobX
     Router.push({
       pathname: `${this.props.nextScreen}`
     });
   };
   handleChange = newData => {
     this.setState({ data: newData });
-    console.log('addworkout handlechange', newData);
   };
 
   render() {
-    const { exerciseName, text, options, max } = this.props;
-    const { data } = this.state;
+    const {
+      exerciseName,
+      text,
+      max,
+      equipment,
+      variations,
+      options
+    } = this.props;
     return (
       <div className="add-workout--container">
         <div className="exercise-specs--container add-workout--item-container">
-          <ExerciseCardHeader exerciseName={exerciseName} />
+          <ExerciseCardHeader
+            exerciseName={exerciseName}
+            equipment={equipment}
+            variations={variations}
+          />
         </div>
         <div className="add-workout--item-container">
           <SelectCard
@@ -35,8 +44,13 @@ export default class AddWorkout extends React.PureComponent {
             options={options}
             max={max}
           />
+          <button
+            className="add-workout--next-button"
+            onClick={this.handleNext}
+          >
+            Next
+          </button>
         </div>
-        <button onClick={this.handleNext}>Next</button>
         <style jsx>{`
           .add-workout--container {
           }
@@ -49,6 +63,14 @@ export default class AddWorkout extends React.PureComponent {
             box-shadow: 1px 1px 5px 1px #888888;
             border-radius: 5px;
           }
+          .add-workout--next-button {
+            border: none;
+            color: blue;
+            float: right;
+            font-size: 1.2rem;
+            padding: 10px;
+            outline: none;
+          }
         `}</style>
       </div>
     );
@@ -59,6 +81,8 @@ AddWorkout.propTypes = {
   nextScreen: PropTypes.string,
   exerciseName: PropTypes.string,
   text: PropTypes.string,
+  equipment: PropTypes.string,
+  variations: PropTypes.arrayOf(PropTypes.string),
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
@@ -90,7 +114,7 @@ function SelectCard({ text, handleChange, options, max }) {
 }
 
 SelectCard.propTypes = {
-  handleChange: PropTypes.fn,
+  handleChange: PropTypes.func,
   text: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({

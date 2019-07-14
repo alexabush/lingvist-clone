@@ -63,7 +63,7 @@ export default class SelectField extends React.Component {
 
 SelectField.propTypes = {
   max: PropTypes.number,
-  onChange: PropTypes.fn,
+  onChange: PropTypes.func,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,

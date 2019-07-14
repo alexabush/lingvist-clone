@@ -33,6 +33,6 @@ export default function ExerciseSpecs({ equipment, variations }) {
 }
 
 ExerciseSpecs.propTypes = {
-  equipment: PropTypes.equipment,
-  variations: PropTypes.variations
+  equipment: PropTypes.string,
+  variations: PropTypes.arrayOf(PropTypes.string)
 };

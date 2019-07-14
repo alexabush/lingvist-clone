@@ -35,7 +35,7 @@ export default class ExerciseCard extends React.PureComponent {
 }
 
 ExerciseCard.propTypes = {
-  exerciseName: PropTypes.exerciseName,
+  exerciseName: PropTypes.string,
   exerciseWeight: PropTypes.number,
   equipment: PropTypes.string,
   variations: PropTypes.arrayOf(PropTypes.string)
