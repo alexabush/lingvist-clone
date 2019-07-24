@@ -1,5 +1,5 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 import SFScroller from './SFScroller';
 
 // TODO
@@ -59,4 +59,4 @@ export default class RepsScroller extends React.PureComponent {
   }
 }
 
-RepsScroller.T = {};
+RepsScroller.propTypes = {};

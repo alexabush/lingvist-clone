@@ -1,19 +1,19 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 import RepsScroller from './RepsScroller';
 
 export default function ExerciseCardFooter({ exerciseWeight }) {
   return (
-    <div className="ExerciseCardFooter">
+    <div className="exercise-card-footer">
       <RepsScroller />
-      <div className="ExerciseCardFooter--weightContainer">
+      <div className="exercise-card-footer--weight-container">
         {exerciseWeight}
       </div>
       <style jsx>{`
-        .ExerciseCardFooter {
+        .exercise-card-footer {
           display: flex;
         }
-        .ExerciseCardFooter--weightContainer {
+        .exercise-card-footer--weight-container {
           font-size: 2rem;
           display: flex;
           justify-content: center;
@@ -26,6 +26,6 @@ export default function ExerciseCardFooter({ exerciseWeight }) {
   );
 }
 
-ExerciseCardFooter.T = {
-  exerciseWeight: T.number
+ExerciseCardFooter.propTypes = {
+  exerciseWeight: PropTypes.number
 };

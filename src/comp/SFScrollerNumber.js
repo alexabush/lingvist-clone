@@ -1,5 +1,5 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 
 export default function SFScrollerNumber({ number, modifier, handleClick }) {
   return (
@@ -23,7 +23,7 @@ export default function SFScrollerNumber({ number, modifier, handleClick }) {
 }
 
 SFScrollerNumber.propTypes = {
-  number: T.number,
-  modifier: T.element,
-  handleClick: T.func
+  number: PropTypes.number,
+  modifier: PropTypes.element,
+  handleClick: PropTypes.func
 };

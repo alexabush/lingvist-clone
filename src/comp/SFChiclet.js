@@ -1,13 +1,13 @@
 import R from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 import { polar1, night1 } from '../colors';
 
 export default class SFChiclet extends R.Component {
   static propTypes = {
-    outline: T.bool,
-    selected: T.bool,
-    onClick: T.func,
-    children: T.any
+    outline: PropTypes.bool,
+    selected: PropTypes.bool,
+    onClick: PropTypes.func,
+    children: PropTypes.any
   };
 
   handleClick = () => {

@@ -1,9 +1,9 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 
 export default function ExtraWorkoutInfo() {
   return (
-    <div className="ExtraWorkoutInfo">
+    <div className="extra-workout-info">
       <p>Extra Information Goes Here</p>
       <p>Equipment Selection w/Weight Calculator</p>
       <p>Variation Selection</p>
@@ -11,7 +11,7 @@ export default function ExtraWorkoutInfo() {
       <p>Rest Timer Config</p>
       <p>Difficulty</p>
       <style jsx>{`
-        .ExtraWorkoutInfo {
+        .extra-workout-info {
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -22,6 +22,4 @@ export default function ExtraWorkoutInfo() {
   );
 }
 
-ExtraWorkoutInfo.T = {
-  exerciseWeight: T.number
-};
+ExtraWorkoutInfo.propTypes = {};

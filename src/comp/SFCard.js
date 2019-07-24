@@ -1,10 +1,10 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class SFCard extends React.Component {
   static propTypes = {
-    children: T.any
+    children: PropTypes.any
   };
 
   renderChildren = () => {
@@ -21,35 +21,35 @@ export default class SFCard extends React.Component {
 
   render() {
     return (
-      <div className="SFCard">
+      <div className="sf-card">
         <ReactCSSTransitionGroup
-          transitionName={'sf-Card--toggle'}
+          transitionName={'sf-card--toggle'}
           transitionEnterTimeout={1000}
           transitionLeaveTimeout={1000}
         >
           {this.renderChildren()}
         </ReactCSSTransitionGroup>
         <style jsx global>{`
-          .SFCard {
+          .sf-card {
             background: white;
             border-radius: 10px;
             padding: 0 40px;
           }
-          .sf-Card--toggle-enter {
+          .sf-card--toggle-enter {
             max-height: 0px;
           }
 
-          .sf-Card--toggle-enter.sf-Card--toggle-enter-active {
+          .sf-card--toggle-enter.sf-card--toggle-enter-active {
             overflow: hidden;
             max-height: 300px;
             transition: max-height 1000ms ease-in;
           }
 
-          .sf-Card--toggle-leave {
+          .sf-card--toggle-leave {
             max-height: 300px;
           }
 
-          .sf-Card--toggle-leave.sf-Card--toggle-leave-active {
+          .sf-card--toggle-leave.sf-card--toggle-leave-active {
             overflow: hidden;
             max-height: 0px;
             transition: max-height 1000ms ease-in;

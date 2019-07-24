@@ -1,14 +1,14 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 import { polar1 } from '../colors';
 import SFScrollerNumber from './SFScrollerNumber';
 
 export default class SFScroller extends React.PureComponent {
   static propTypes = {
-    values: T.arrayOf(T.number),
-    modifiers: T.object,
-    onChange: T.func,
-    onSlide: T.func
+    values: PropTypes.arrayOf(PropTypes.number),
+    modifiers: PropTypes.object,
+    onChange: PropTypes.func,
+    onSlide: PropTypes.func
   };
 
   constructor(props) {

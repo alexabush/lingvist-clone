@@ -1,5 +1,5 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 import SFCard from './SFCard';
 import ExerciseCardHeader from './ExerciseCardHeader';
 import ExerciseCardFooter from './ExerciseCardFooter';
@@ -17,15 +17,15 @@ export default class ExerciseCard extends React.PureComponent {
   };
 
   render() {
-    // const {exerciseWeight} = this.props
-    const exerciseWeight = 180;
+    const { exerciseName, exerciseWeight, equipment, variations } = this.props;
     return (
       <SFCard>
         <ExerciseCardHeader
-          exerciseName={'Bench Press'}
-          equipment={'Bench Press'}
-          variations={['15 deg Incline', '45 deg Incline']}
+          exerciseName={exerciseName}
+          equipment={equipment}
+          variations={variations}
           onClick={this.toggleExpand}
+          withChiclets
         />
         {this.state.isExpanded && <ExtraWorkoutInfo />}
         <ExerciseCardFooter exerciseWeight={exerciseWeight} />
@@ -34,6 +34,9 @@ export default class ExerciseCard extends React.PureComponent {
   }
 }
 
-ExerciseCardFooter.T = {
-  exerciseWeight: T.number
+ExerciseCard.propTypes = {
+  exerciseName: PropTypes.string,
+  exerciseWeight: PropTypes.number,
+  equipment: PropTypes.string,
+  variations: PropTypes.arrayOf(PropTypes.string)
 };

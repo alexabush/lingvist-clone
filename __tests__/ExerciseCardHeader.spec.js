@@ -16,17 +16,17 @@ describe('ExerciseCardHeader', () => {
     );
   });
   it('renders text', function() {
-    expect(wrap.find('.ExerciseCardHeader--splitContainer h2').text()).toEqual(
-      'lift'
-    );
+    expect(
+      wrap.find('.exercise-card-header--split-container h2').text()
+    ).toEqual('lift');
     expect(
       wrap
-        .find('.ExerciseCardHeader--equipmentContainer span')
+        .find('.exercise-card-header--equipment-container span')
         .first()
         .text()
     ).toEqual('bar');
     expect(
-      wrap.find('.ExerciseCardHeader--variationsContainer').text()
+      wrap.find('.exercise-card-header--variations-container').text()
     ).toEqual('lift1, lift2');
   });
   it('handleClick called on click', function() {});
