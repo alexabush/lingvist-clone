@@ -1,8 +1,8 @@
 {
-  "name": "snowflake",
+  "name": "@spruce-digital/snowflake",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "next build",
     "dev": "next",
@@ -21,6 +21,9 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@types/jest": "^24.0.15",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.2",
