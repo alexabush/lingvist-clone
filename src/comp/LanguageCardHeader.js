@@ -1,38 +1,38 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import SFProgressInfo from './SFProgressInfo';
-import ToggleEnglishPhrase from './ToggleEnglishPhrase';
+import ProgressInfo from './ProgressInfo';
+import ToggleNativePhrase from './ToggleNativePhrase';
 
-export default function SFLanguageCardHeader({ englishPhrase, wordStrength }) {
+export default function LanguageCardHeader({ nativePhrase, wordStrength }) {
   const [isShow, setIsShow] = useState(false);
   const toggleShow = () => {
     setIsShow(!isShow);
   };
   return (
-    <div className="SFLanguageCardHeader">
-      <p className={`sf-header ${isShow || 'sf-hideHeader'}`}>
-        {englishPhrase && englishPhrase}
+    <div className="language-card-header">
+      <p className={`header ${isShow || 'hide-header'}`}>
+        {nativePhrase && nativePhrase}
       </p>
       <Link href="/levels">
         <div>
-          <SFProgressInfo wordStrength={wordStrength} />
+          <ProgressInfo wordStrength={wordStrength} />
         </div>
       </Link>
-      <ToggleEnglishPhrase isShow={isShow} toggleShow={toggleShow} />
+      <ToggleNativePhrase isShow={isShow} toggleShow={toggleShow} />
       <style jsx>{`
-        .SFLanguageCardHeader {
+        .language-card-header {
           display: flex;
           justify-content: space-between;
           padding: 5px 5px 0px 25px;
         }
-        .sf-header {
+        .header {
           position: absolute;
           top: -80px;
           transition: all 500ms;
           font-size: 1rem;
         }
-        .sf-hideHeader {
+        .hide-header {
           transform: translateY(20px);
           opacity: 0;
         }
@@ -41,7 +41,7 @@ export default function SFLanguageCardHeader({ englishPhrase, wordStrength }) {
   );
 }
 
-SFLanguageCardHeader.propTypes = {
-  englishPhrase: PropTypes.string,
+LanguageCardHeader.propTypes = {
+  nativePhrase: PropTypes.string,
   wordStrength: PropTypes.number
 };

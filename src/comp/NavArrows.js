@@ -2,55 +2,55 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { polar4 } from '../colors';
 
-export default function SFNavArrows({
+export default function NavArrows({
   onLeftClick,
   onRightClick,
   isPrev,
   children
 }) {
   return (
-    <div className="SFNavArrows">
+    <div className="sf-nav-arrows">
       <div
-        className="SFNavArrows--arrowContainer SFNavArrows--leftArrowContainer"
+        className="sf-nav-arrows--arrow-container sf-nav-arrows--left-arrow-container"
         onClick={onLeftClick}
       >
-        {isPrev ? null : <div className="SFNavArrows--arrow">L</div>}
+        {isPrev ? null : <div className="sf-nav-arrows--arrow">L</div>}
       </div>
       {children}
       <div
-        className="SFNavArrows--arrowContainer SFNavArrows--rightArrowContainer"
+        className="sf-nav-arrows--arrow-container sf-nav-arrows--right-arrow-container"
         onClick={onRightClick}
       >
-        <div className="SFNavArrows--arrow">R</div>
+        <div className="sf-nav-arrows--arrow">R</div>
       </div>
       <style jsx>{`
-        .SFNavArrows {
+        .sf-nav-arrows {
           display: flex;
         }
-        .SFNavArrows--arrowContainer {
+        .sf-nav-arrows--arrow-container {
           display: flex;
           justify-content: center;
           min-height: 100%;
           min-width: 20px;
         }
-        .SFNavArrows--arrowContainer:hover {
+        .sf-nav-arrows--arrow-container:hover {
           cursor: pointer;
         }
-        .SFNavArrows--arrowContainer:active {
+        .sf-nav-arrows--arrow-container:active {
           background: ${polar4};
         }
-        .SFNavArrows--arrowContainer.SFNavArrows--leftArrowContainer:hover
+        .sf-nav-arrows--arrow-container.sf-nav-arrows--left-arrow-container:hover
           .arrow {
           transform: translateX(-3px);
         }
-        .SFNavArrows--arrowContainer.SFNavArrows--rightArrowContainer:hover
+        .sf-nav-arrows--arrow-container.sf-nav-arrows--right-arrow-container:hover
           .arrow {
           transform: translateX(3px);
         }
-        .SFNavArrows--arrow {
+        .sf-nav-arrows--arrow {
           align-self: center;
         }
-        .SFNavArrows--arrowContainer.SFNavArrows--leftArrowContainer {
+        .sf-nav-arrows--arrow-container.sf-nav-arrows--left-arrow-container {
           visibility: ${isPrev ? 'hidden' : 'visible'};
         }
       `}</style>
@@ -58,7 +58,7 @@ export default function SFNavArrows({
   );
 }
 
-SFNavArrows.propTypes = {
+NavArrows.propTypes = {
   onLeftClick: PropTypes.func,
   onRightClick: PropTypes.func,
   isPrev: PropTypes.bool,

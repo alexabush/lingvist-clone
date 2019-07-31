@@ -3,22 +3,22 @@ import PropTypes from 'prop-types';
 import { polar1, night4 } from '../colors';
 
 // TODO bug in multiline display
-export default function SFTooltip({ display, direction = 'bottom', children }) {
+export default function Tooltip({ display, direction = 'bottom', children }) {
   return (
-    <span className={`SFTooltip--container SFTooltip--${direction}`}>
-      <span className="SFTooltip" data-display={display} />
+    <span className={`sf-tooltip--container sf-tooltip--${direction}`}>
+      <span className="sf-tooltip" data-display={display} />
       {children}
       <style jsx>{`
-        .SFTooltip--container {
+        .sf-tooltip--container {
           position: relative;
         }
-        .SFTooltip--container:hover .SFTooltip::before {
+        .sf-tooltip--container:hover .sf-tooltip::before {
           display: block;
         }
-        .SFTooltip--container:hover .SFTooltip::after {
+        .sf-tooltip--container:hover .sf-tooltip::after {
           display: block;
         }
-        .SFTooltip::before {
+        .sf-tooltip::before {
           display: none;
           font-size: 0.5rem;
           content: attr(data-display);
@@ -30,18 +30,18 @@ export default function SFTooltip({ display, direction = 'bottom', children }) {
           position: absolute;
           white-space: nowrap;
         }
-        .SFTooltip::after {
+        .sf-tooltip::after {
           display: none;
           content: '';
           border-style: solid;
           position: absolute;
         }
 
-        .SFTooltip--top .SFTooltip::before {
+        .sf-tooltip--top .sf-tooltip::before {
           left: 50%;
           transform: translate(-50%, -150%);
         }
-        .SFTooltip--top .SFTooltip::after {
+        .sf-tooltip--top .sf-tooltip::after {
           border-width: 7px 7px 0px 7px;
           border-color: ${polar1} transparent transparent transparent;
           top: -12px;
@@ -53,7 +53,7 @@ export default function SFTooltip({ display, direction = 'bottom', children }) {
   );
 }
 
-SFTooltip.propTypes = {
+Tooltip.propTypes = {
   display: PropTypes.string,
   direction: PropTypes.string,
   width: PropTypes.number,

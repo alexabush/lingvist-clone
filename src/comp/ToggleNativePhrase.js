@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function ToggleEnglishPhrase({ isShow, toggleShow }) {
+export default function ToggleNativePhrase({ isShow, toggleShow }) {
   const handleClick = () => {
     toggleShow();
   };
   return (
     <div
-      className={`sf-ToggleEnglishPhrase ${isShow &&
-        'sf-ToggleEnglishPhrase--flip'}`}
+      className={`toggle-native-phrase ${isShow &&
+        'toggle-native-phrase--flip'}`}
       onClick={handleClick}
     >
       ^
       <style jsx>{`
-        .sf-ToggleEnglishPhrase {
+        .toggle-native-phrase {
           transition: transform 300ms;
         }
-        .sf-ToggleEnglishPhrase--flip {
+        .toggle-native-phrase--flip {
           transform: rotate(180deg);
         }
       `}</style>
@@ -24,7 +24,7 @@ export default function ToggleEnglishPhrase({ isShow, toggleShow }) {
   );
 }
 
-ToggleEnglishPhrase.propTypes = {
+ToggleNativePhrase.propTypes = {
   isShow: PropTypes.bool,
   toggleShow: PropTypes.func
 };
