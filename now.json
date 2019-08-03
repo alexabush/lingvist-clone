@@ -1,5 +1,5 @@
 {
-  "github": {
-    "autoAlias": false
-  }
+  "name": "language",
+  "version": 2,
+  "alias": "language.alexanderbush7.now.sh"
 }
