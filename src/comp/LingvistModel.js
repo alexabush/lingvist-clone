@@ -1,30 +1,10 @@
 import React from 'react';
+import fetch from 'isomorphic-unfetch';
 import Lingvist from './Lingvist';
 
-const data = [
-  {
-    foreignWord: 'trabajo',
-    foreignPhrase: 'El * duro',
-    nativePhrase: 'The hard work',
-    nativeWord: ['the work', 'the job'],
-    wordStrength: 1,
-    wordDetails: 'masculine, singular',
-    partOfSpeech: 'Noun'
-  },
-  {
-    foreignWord: 'vez',
-    foreignPhrase: 'Una otra *',
-    nativePhrase: 'One more time',
-    nativeWord: ['once'],
-    wordStrength: 4,
-    wordDetails: 'feminine, singular',
-    partOfSpeech: 'Noun'
-  }
-];
-
 class LingvistData {
-  constructor(cardData = {}, index = 0) {
-    this.cardData = cardData;
+  constructor(words = {}, index = 0) {
+    this.words = words;
     this._index = index;
   }
 
@@ -37,38 +17,38 @@ class LingvistData {
   }
 
   get foreignWord() {
-    return this.cardData[this.index].foreignWord;
+    return this.words[this.index].foreignWord;
   }
   get foreignPhrase() {
-    return this.cardData[this.index].foreignPhrase;
+    return this.words[this.index].foreignPhrase;
   }
   get nativePhrase() {
-    return this.cardData[this.index].nativePhrase;
+    return this.words[this.index].nativePhrase;
   }
   get nativeWord() {
-    return this.cardData[this.index].nativeWord;
+    return this.words[this.index].nativeWord;
   }
   get wordStrength() {
-    return this.cardData[this.index].wordStrength;
+    return this.words[this.index].wordStrength;
   }
   set wordStrength(newWordStrength) {
-    this.cardData[this.index].wordStrength = newWordStrength;
+    this.words[this.index].wordStrength = newWordStrength;
   }
   get wordDetails() {
-    return this.cardData[this.index].wordDetails;
+    return this.words[this.index].wordDetails;
   }
   get partOfSpeech() {
-    return this.cardData[this.index].partOfSpeech;
+    return this.words[this.index].partOfSpeech;
   }
 }
 export default class LingvistContainer extends React.Component {
   state = {
-    model: new LingvistData(data, 0)
+    model: new LingvistData(this.props.foreignWords, 0)
   };
 
   updateWordStrength = newWordStrength => {
     let m = this.state.model;
-    m.cardData[m.index].wordStrength = newWordStrength;
+    m.words[m.index].wordStrength = newWordStrength;
     this.setState({ model: m });
   };
   updateIndex = newIndex => {
