@@ -12,7 +12,6 @@ const LingvistPage = (props) => {
 LingvistPage.getInitialProps = async () => {
   const res = await fetch("https://alexabush.github.io/portfolio-data/json/lingvist-data.json")
   const data = await res.json()
-  console.log('data',data.words)
   return {data}
 }
 
