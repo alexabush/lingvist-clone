@@ -12,7 +12,7 @@ export default function LanguageCardFooter({ wordDetails, description }) {
     <div className="language-card-footer">
       <div className="language-card-footer--word-data-container">
         <Tooltip display={wordDetails} direction="top">
-          P
+          Details
         </Tooltip>
         <Tooltip display="Noun" direction="top">
           {description}
