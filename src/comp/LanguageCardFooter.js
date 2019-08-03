@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Tooltip from './Tooltip';
-import LetterPicker from './LetterPicker';
+// import LetterPicker from './LetterPicker';
 
-export default function LanguageCardFooter({ wordDetails, description }) {
-  const [showAdditionalLetters, setShowAdditionalLetters] = useState(false);
-  const toggleShowAdditionalLetters = () => {
-    setShowAdditionalLetters(!showAdditionalLetters);
-  };
+export default function LanguageCardFooter({ wordDetails, partOfSpeech }) {
+  // const [showAdditionalLetters, setShowAdditionalLetters] = useState(false);
+  // const toggleShowAdditionalLetters = () => {
+  //   setShowAdditionalLetters(!showAdditionalLetters);
+  // };
   return (
     <div className="language-card-footer">
       <div className="language-card-footer--word-data-container">
-        <Tooltip display={wordDetails} direction="top">
-          Details
-        </Tooltip>
-        <Tooltip display="Noun" direction="top">
-          {description}
-        </Tooltip>
+        {wordDetails ? `${wordDetails}, ${partOfSpeech}` : partOfSpeech}
       </div>
 
-      <div className="language-card-footer--letter-picker-container">
+      {/* TODO Unnecceary Feature Right Now. Finish Implementing Later */}
+      {/* Should display foreign letters not on keyboard and enter them into input box when clicked */}
+      {/* <div className="language-card-footer--letter-picker-container">
         <div
           className="language-card-footer--toggle-container"
           onClick={toggleShowAdditionalLetters}
@@ -39,7 +35,7 @@ export default function LanguageCardFooter({ wordDetails, description }) {
             ]}
           />
         )}
-      </div>
+      </div> */}
 
       <style jsx>{`
         .language-card-footer {
@@ -57,5 +53,5 @@ export default function LanguageCardFooter({ wordDetails, description }) {
 
 LanguageCardFooter.propTypes = {
   wordDetails: PropTypes.string,
-  description: PropTypes.string
+  partOfSpeech: PropTypes.string
 };

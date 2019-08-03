@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { rellow } from '../colors';
 import Modal from './Modal';
 import NavArrows from './NavArrows';
 import LevelsInfo from './LevelsInfo';
@@ -84,8 +83,7 @@ export default class Lingvist extends React.Component {
 
         <style jsx>{`
           .lingvist {
-            min-height: 100vh;
-            background: ${rellow};
+            min-height: 350px;
             padding: 15px;
             display: flex;
             flex-direction: column;

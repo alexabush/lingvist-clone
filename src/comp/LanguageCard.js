@@ -31,7 +31,6 @@ export default function LanguageCard({
       />
       <LanguageCardFooter
         wordDetails={wordDetails}
-        description="^"
         partOfSpeech={partOfSpeech}
       />
       <style jsx>{`
